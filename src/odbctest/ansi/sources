@@ -1,0 +1,9 @@
+!include ..\sources.inc
+
+TARGETNAME=odbcte32
+LOCALIZE_NO_MUI=0  #Make DLL or EXE end up in the testbin directory
+C_DEFINES=$(C_DEFINES)
+TARGETLIBS=$(TARGETLIBS) \
+           $(PROJROOT_OBJ)\ODBC\Tools\OdbcTest\gatortst\ansi\$(O)\gtrtst32.lib
+
+

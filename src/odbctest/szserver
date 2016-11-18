@@ -1,0 +1,128 @@
+connwin.c: 	WORD		wIndex=(WORD)SendMessage(lpci->hwndStmts, CB_GETCURSEL, 0, 0L);
+connwin.c: 	lpci->lpCurStmt = lpci->lpStmt;
+connwin.c: 		lpci->lpCurStmt = NULL;
+connwin.c: 		lpci->lpCurStmt = lpci->lpCurStmt->next;
+connwin.c: 	for(lpStmt = lpci->lpStmt;
+connwin.c: 	SendMessage(lpci->hwndStmts, CB_SETCURSEL, iPos, 0L);
+connwin.c: 	SendMessage(lpci->hwndStmts, CB_SHOWDROPDOWN, FALSE, 0L);
+connwin.c: 	if(fHwnd == lpci->hwndIn)
+connwin.c: 		SetFocus(lpci->hwndOut);
+connwin.c: 	else if(fHwnd == lpci->hwndOut)
+connwin.c: 		SetFocus(lpci->hwndStmts);
+connwin.c: 		SetFocus(lpci->hwndIn);
+connwin.c: 	if(lpci->uState & STATE_CONNECTED_HDBC)
+connwin.c: 					(*lpci->szUser) ? (LPTSTR)lpci->szUser : (LPTSTR)szUNKNOWN, 
+connwin.c: 					(LPTSTR)lpci->szServer,
+connwin.c: 					lpci->lpActiveEnv->cEnvNum,
+connwin.c: 					GETADDRINFO(lpci->lpActiveEnv->henv),
+connwin.c: 					GETADDRINFO(lpci->hdbc));
+fhconn.c: 	if(lpci->uState & STATE_CONNECTED_HDBC) {
+fhconn.c: 		if(lpci->szUser)
+fhconn.c: 			ReleaseMemory(lpci->szUser);		
+fhconn.c: 		*lpci->szServer = '\0';
+fhconn.c: 		wsprintf((LPTSTR)lpci->szClientTitle, 
+fhconn.c: 					lpci->lpActiveEnv->cEnvNum,
+fhconn.c: 					GETADDRINFO(lpci->lpActiveEnv->henv),lpci->uConNum);
+fhconn.c: 		SetWindowText(lpci->hwnd, (LPTSTR)lpci->szClientTitle);
+fhconn.c: 		FREE_PTR(lpci->uSupportedFunctions);
+fhconn.c: 	lpci->uState &= ~STATE_CONNECTED_HDBC;					
+fhconn.c: 	lpci->uState &= ~STATE_BROWSING_HDBC;
+fhconn.c: 			lpci->hdbc = hdbc;
+fhconn.c: 			lpci->uState = STATE_ALLOCATED_HDBC;
+fhconn.c: //			if(SQL_SUCCESS != SQLSetConnectOption(lpci->hdbc, 
+fhconn.c: // 				ToolOptionsAllErrors(lpci, henv, lpci->hdbc, NULL);
+fhconn.c: 		lpci->hdbc = hdbc;
+fhconn.c: 		lpci->uState = STATE_ALLOCATED_HDBC;
+fhconn.c: 			if(SQL_SUCCESS != SQLSetConnectOption(lpci->hdbc, 
+fhconn.c: 					ToolOptionsAllErrors(lpci, henv, lpci->hdbc, NULL);
+fhconn.c: 		if (DisplayErrors(hwndOutWin,lpci->lpActiveEnv->henv,hdbc,FALSE,0))
+fhconn.c: 			rc = SQLConnect(lpci->hdbc, 
+fhconn.c: 					(LPTSTR)lpci->szServer);
+fhconn.c: 	SetFocus(lpci->hwndIn);
+fhconn.c: 		HDBC hdbctmp=lpci ? lpci->hdbc:NULL;
+fhconn.c: 	lpEi=lpci->lpActiveEnv;
+fhconn.c: 		if(lpci->uState & STATE_CONNECTED_HDBC ||
+fhconn.c: 			lpci->uState & STATE_BROWSING_HDBC) 
+fhconn.c: 			rc = SQLDisconnect(lpci->hdbc);
+fhconn.c: 		if(lpci->hdbc) 
+fhconn.c: 				rc = SQLFreeHandle(SQL_HANDLE_DBC,lpci->hdbc);
+fhconn.c: 				rc = SQLFreeConnect(lpci->hdbc);
+fhconn.c: 			lpci->uState &= ~STATE_BROWSING_HDBC;
+fhdesc.c: 	lpDESCRIPTORINFO	lpDesc=lpci->lpCurDesc;
+fhdesc.c: 	for(lpDesc=lpci->lpDesc; --dwIndex>0;  )
+fhdesc.c: 		if(lpci->lpDesc == lpDesc)			// Removing head node?
+fhdesc.c: 			lpci->lpDesc = lpDesc->next;
+fhdesc.c: 		lpci->lpDesc = NULL;
+fhdesc.c: 	--lpci->cDescs;
+fhdesc.c: 	if(!lpci || !lpci->lpDesc)
+fhdesc.c: 	while(lpci->lpStmt) 
+fhdesc.c: //		SendMessage(lpci->hwndStmts, CB_SETCURSEL, (WPARAM)1, 0L);  	// Head node
+fhdesc.c: 		rc = SQLFreeHandle(SQL_HANDLE_DESC,lpci->lpCurDesc->hdesc);
+fhrslt.c: 					ToolOptionsAllErrors(lpci,lpci->lpActiveEnv->henv, lpci->hdbc, lpci->lpCurStmt->hstmt);
+fhrslt.c: 				ToolOptionsAllErrors(lpci, lpci->lpActiveEnv->henv, lpci->hdbc, lpci->lpCurStmt->hstmt);
+fhrslt.c: 	ToolOptionsAllErrors(lpci, lpci->lpActiveEnv->henv, lpci->hdbc, hstmt);  \
+fhrslt.c: 	if(lpci && lpci->lpCurStmt) {
+fhrslt.c: 		hstmt = lpci->lpCurStmt->hstmt;
+fhrslt.c: 		uHighestBoundCol = lpci->lpCurStmt->uHighestBoundCol;
+fhrslt.c: 	if(lpci && lpci->lpCurStmt) {
+fhrslt.c: 		hstmt = lpci->lpCurStmt->hstmt;
+fhrslt.c: 		uHighestBoundCol = lpci->lpCurStmt->uHighestBoundCol;
+fhrslt.c: 	rc = SQLGetFunctions(lpci->hdbc, SQL_API_SQLMORERESULTS, &fMoreResultsSupported);
+fhrslt.c: 	lpStmt = lpci->lpCurStmt;
+fhrslt.c: 		ResultsShowBoundCols(lpci, lpci->lpCurStmt->lpVars, rc, dex, fHdr);
+fhrslt.c: 		ResultsShowBoundCols(lpci, lpci->lpCurStmt->lpVars, rc, dex, fHdr);
+fhrslt.c: 	if(!lpci->lpCurStmt->fColBinding) {
+fhrslt.c: 		lpSTATEMENTINFO		lpStmt=lpci->lpCurStmt;
+fhrslt.c: 	ToolOptionsAllErrors(lpci, lpci->lpActiveEnv->henv, lpci->hdbc, lpStmt->hstmt);
+fhrslt.c: 	HSTMT					hstmt=lpci->lpCurStmt->hstmt;
+fhrslt.c: 	rc = SQLGetFunctions(lpci->hdbc, SQL_API_SQLMORERESULTS, &fMoreResultsSupported);
+fhrslt.c: 						ToolOptionsAllErrors(lpci, lpci->lpActiveEnv->henv, lpci->hdbc, hstmt);
+fhrslt.c: 		lpStmt->lpResults = CreateResultWindow(lpci->lpActiveEnv->hwndClient, hInst, henv,
+fhrslt.c: 						lpci, lpci->lpCurStmt);
+fhstmt.c: 	if(!lpci || !lpci->lpStmt)
+fhstmt.c: 	while(lpci->lpStmt) {
+fhstmt.c: 		SendMessage(lpci->hwndStmts, CB_SETCURSEL, (WPARAM)1, 0L);  	// Head node
+fhstmt.c: 			SQLCancel(lpci->lpCurStmt->hstmt);
+fhstmt.c: 				rc = SQLFreeHandle(SQL_HANDLE_STMT,lpci->lpCurStmt->hstmt);
+fhstmt.c: 				rc = SQLFreeStmt(lpci->lpCurStmt->hstmt, SQL_DROP);
+fhstmt.c: 	lpSTATEMENTINFO 	lpStmt = lpci->lpStmt;
+fhstmt.c: 	SWORD					iStmts = lpci->cStmts;
+fhstmt.c: 		SWORD			cStmts=lpci->cStmts;
+fhstmt.c: 		lpStmt = lpci->lpStmt;
+fhstmt.c: 		cStmts=lpci->cStmts;
+fhstmt.c: 		lpStmt = lpci->lpStmt;
+fhstmt.c: 		lpci->uRowWiseSize = uNewVal;
+main.c: 	if(!(lpci->uState & STATE_CONNECTED_HDBC))
+main.c: 	if(lpci->uSupportedFunctions)
+main.c: 		return lpci->uSupportedFunctions;
+main.c: 	else if(GetSupportedFunctions(lpci->hdbc, lpci))
+main.c: 		return lpci->uSupportedFunctions;
+rsltwin.c: 				(LPTSTR)lpci->szClientTitle);
+rsltwin.c: 	ToolOptionsAllErrors(lprw->lpci, lprw->lpci->lpActiveEnv->henv, lprw->lpci->hdbc, lpStmt->hstmt);  
+usrwndp.c: 					if((lpci) && (lpci->lpCurStmt) && (lpci->lpCurStmt->lpParams)){
+usrwndp.c: 						wsprintf(szTemp, "%u", lpci->lpCurStmt->lpParams->ipar);
+usrwndp.c: 				((lpci) && (lpci->lpCurStmt) && (lpci->lpCurStmt->fParamOpt) && 
+usrwndp.c: 				((irow + lpci->lpCurStmt->cParamRows - 1) > lpSiList->uRowSetSize))){
+usrwndp.c: 									&lpci->lpCurStmt->hstmt, &lpci->lpDesc->hdesc,
+usrwndp.c: 									lpci->lpCurStmt->cStmtNum);
+usrwndp.c: 					wsprintf(szTemp,"%u",lpci->lpCurStmt->lpParams->ipar);
+usrwndp.c: 					UpdateFillParamControls(hDlg, lpDlg, lpci->lpCurStmt->lpParams, 1);
+usrwndp.c: 						lpParam = SearchParamList(lpci->lpCurStmt, ipartmp);
+usrwndp.c: 							if(lpci->lpCurStmt->cParamRows > 1){
+usrwndp.c: 									if((udRowTmp != 0) && (udRowTmp <= lpci->lpCurStmt->cParamRows))
+usrwndp.c: 			if(!(lpci->lpCurStmt->fDisabled))
+usrwndp.c: 	if((lpci) && (lpci->lpCurStmt) && (lpci->lpCurStmt->lpParams)){
+usrwndp.c: 		lpParam=SearchParamList(lpci->lpCurStmt,ipar);
+usrwndp.c: 	if(lpci->lpStmt){
+usrwndp.c: 		lpsi = lpci->lpStmt;
+usrwndp.c: 		for(idx=0;idx<(UINT)(lpci->cStmts);idx++){
+usrwndp.c: 							&lpci->lpCurStmt->hstmt, NULL,
+usrwndp.c: 							lpci->lpCurStmt->cStmtNum);
+usrwndp.c: 					if(lpci->lpCurStmt->uBoundCols) {
+usrwndp.c: 						lpBOUNDVARS		lpbv=lpci->lpCurStmt->lpVars;
+usrwndp.c: 							if(!IsBoundColumn(uCol, lpci->lpCurStmt))
+usrwndp.c: 								uRow > TOT_ROWSET_SIZE(lpci->lpCurStmt))
+usrwndp.c: 			lpSTATEMENTINFO	lpStmt=lpci->lpCurStmt;
+usrwndp.c: 			lpSTATEMENTINFO	lpStmt=lpci->lpCurStmt;
+usrwndp.c: 			lpbv = IsBoundColumn(uCol, lpci->lpCurStmt);
+usrwndp.c: 				uRow > TOT_ROWSET_SIZE(lpci->lpCurStmt))

@@ -1,0 +1,356 @@
+//Microsoft App Studio generated resource script.
+//
+#include "gtrhdrs.h"
+#include "file.h"
+#include <dlgs.h>
+#include "odbcver.h"
+
+
+// Bitmaps used for testcase list
+IDBT_PLUS					BITMAP	DISCARDABLE		PLUS.BMP
+IDBT_MINUS					BITMAP	DISCARDABLE		MINUS.BMP
+IDBT_GROUP					BITMAP 	DISCARDABLE		GROUP.BMP
+IDBT_AUTOT					BITMAP	DISCARDABLE		AUTOTEST.BMP
+IDBT_TESTC					BITMAP	DISCARDABLE		TESTCASE.BMP
+
+
+
+//
+//	Stamp version information, used by setup, viewable in File Manager
+//
+#ifndef WIN32
+#include <version.h>
+#endif
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION 		VER_FILEVERSION
+PRODUCTVERSION 	VER_PRODUCTVERSION
+FILEFLAGSMASK 		(VS_FF_DEBUG | VS_FF_PRERELEASE)
+FILEFLAGS 			(VS_FF_PRERELEASE)
+#ifndef WIN32
+FILEOS 				VOS_DOS_WINDOWS16
+#else
+FILEOS				VOS_NT_WINDOWS32
+#endif
+FILETYPE 			VFT_DLL
+FILESUBTYPE 		VFT2_UNKNOWN
+
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904E4"
+        BEGIN
+            VALUE "Company Name", "Microsoft Corporation\0"
+            VALUE "FileDescription", "Microsoft ODBC Test\0"
+            VALUE "FileVersion", VER_FILEVERSION_STR
+            VALUE "InternalName", "GATOR\0"
+            VALUE "LegalCopyright", "\251 1990-1996 Microsoft Corporation.  All rights reserved.\0"
+            VALUE "LegalTrademarks", "ODBC(TM) is a trademark of Microsoft Corporation.  Microsoft\256 and Windows\256 are registered trademarks of Microsoft Corporation.\0"
+            VALUE "OriginalFilename", GATORTST_ORGFILENAME
+            VALUE "ProductName", "Microsoft ODBC Test Tool\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+
+//
+//	Error messages for Auto Test API
+//
+STRINGTABLE DISCARDABLE
+BEGIN
+	idsAutoTestNotInIni						"Auto test %s not installed."
+	idsAutoTestLoadFailed					"Auto test '%s' not loaded due to error %d from LoadLibrary."
+	idsAutoTestGetProcFailed				"Could not find one or more of AutoTestName, AutoTestDesc, or AutoTestFunc in auto test %s."
+	idsAutoTestAlreadyInstalled			"Auto test '%s' is already installed."
+	idsRemoveAutoTest							"Remove auto test '%s'?"
+	idsAutoTestNotValid						"Auto test '%s' is not valid.  Remove from .INI file?"
+	idsAutoTestNameInvalid					"'%s' is not a valid name.  Names cannot be blank, contain the [, ], or = characters, start with leading blanks, or be reserved section names."
+	idsDialogNotLoaded						"Dialog %s was not loaded due to an error."
+	idsNowExecuting							"Now executing Auto Test:  %s\r\n"
+	idsAutoTestSource							"Source:  %s\r\n"
+	idsTimeStarted								"Time started:  %s\r\n"
+	idsTimeFinished							"Time finished:  %s\r\n"
+	idsAborted									"\t**** Auto Test Aborted ****\r\n"
+	idsTestCompleted							"%s completed.\r\n"
+	idsTimeTotal								"Total execution time:  %s\r\n\r\n"
+	idsNoFailures								"No failures!\r\n"
+	idsTestFailure								"%d failure.\r\n"
+	idsTestFailures							"%d failures.\r\n"
+	idsGrandTotalErrors						"Total of %d failures.\r\n"
+	idsTestCase									"%s:  \r\n\t%s\r\n"
+	idsIniFileNotFound						"Could not find the initialization file required for this option."
+	idsLogFileNotValid						"Error writing to log file %s.  Continue logging?"
+	idsDeleteGroup								"Delete group %s?"
+	idsReplaceGroup							"Replace existing group %s?"
+	idsNowExecutingGroup						"Now executing Group %s on source %s\r\n"
+	idsGroupGrandTotal						"\r\nGrand total of %d failures for group %s.\r\n\r\n\r\n"
+	idsBufferOverflow							"*****  Buffer overflow on output  *****\r\n"
+	idsLogFilter								"Log Files (*.log)|*.log|All Files (*.*)|*.*|"
+	idsGroupNameInUse							"Group name '%s' is already being used as an Auto Test or Data Source name."
+	idsAutoNameInUse							"Auto test name '%s' is already being used as a Group or Data Source name."
+	idsLogTitle									"Log File"
+	idsOverWriteFile							"Replace existing file %s?"
+	idsDefault									"<Default>"
+	idsGetNewRunList							"New Run List"
+	idsDeleteRunList							"Delete Run List '%s'?"
+	idsRunListFilter							"Run Lists (*.rls)|*.rls|"
+	idsFileExtMustBeRls						"File extension for Run List must be .rls"
+	idsDeleteSource							"Delete source '%s'?"
+	idsSourceNameInUse						"Source name '%s' is already being used as an Auto Test or Group name."
+	idsReplaceSource							"Replace existing source '%s'?"
+	idsTestCaseCountMismatch				"The registered count of test cases is %u, but the count returned from '%s' is %u.  Adjust value to %u?"
+	idsTestCaseUpdatedRun					"Test case '%s' has been updated, but the change will not take affect until the next run.  This test will be skipped for this run."
+	idsTestCaseUpdated						"Test case '%s' has been updated."
+	idsTestCaseNotCorrect					"Test case '%s' was not updated.  This could cause an invalid execution of tests.  To fix this problem, remove and add the test using Manage Tests."
+	idsTruncated								"Contents truncated...\r\n"
+	idsDeleteFileNotFound					"Error deleting file '%s'.  File not found."
+	idsNoDSNsInstalled						"No ODBC DSNs have been installed, therefore no Test Sources may be defined.  Please create one or more DSNs using the ODBC Administrator then try your request again."
+	idsLibraryFileNotFound					"The file %s for Auto Test %s was not found."
+	idsRlsPrompt								"Select the directory which you want to select and save .RLS files from"
+	idsKeywords									"Keywords:  %s\r\n"
+END
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+IDD_MANAGE_TESTS DIALOG DISCARDABLE  0, 0, 288, 153
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Manage Auto Tests"
+FONT 8, "System Font"
+BEGIN
+    PUSHBUTTON      "&From...",IDB_FROM,6,8,43,14,WS_GROUP
+    LTEXT           "Static",IDT_FROM,55,11,225,11
+    LTEXT           "A&vailable DLLs:",-1,6,28,55,9
+    LISTBOX         IDL_AVAILABLE,8,40,75,72,LBS_SORT | LBS_NOINTEGRALHEIGHT |
+                    LBS_EXTENDEDSEL | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "&Add >",IDB_ADD,91,46,50,14,WS_GROUP
+    PUSHBUTTON      "< &Remove",IDB_REMOVE,91,68,50,14
+    DEFPUSHBUTTON   "&Close",IDCANCEL,91,98,50,14,WS_GROUP
+    LTEXT           "&Installed Auto Tests:",-1,145,28,71,9
+    LISTBOX         IDL_INSTALLED,147,40,135,72,LBS_SORT |
+                    LBS_NOINTEGRALHEIGHT | LBS_EXTENDEDSEL | WS_VSCROLL |
+                    WS_TABSTOP
+    LTEXT           "Name:",-1,6,121,30,7
+    LTEXT           "Name",IDT_NAME,42,121,159,10
+    LTEXT           "DLL:",-1,6,134,26,9
+    LTEXT           "C:\\",IDT_DLL,42,134,235,9
+END
+
+IDD_MANAGE_GROUPS DIALOG DISCARDABLE  0, 0, 352, 123
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Manage Test Groups"
+FONT 8, "System Font"
+BEGIN
+    LTEXT           "Test &Group:",IDT_GROUP,4,8,44,8
+    COMBOBOX        IDC_GROUPS,48,6,111,60,CBS_DROPDOWNLIST | CBS_SORT |
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "&New...",IDB_NEW,167,5,49,14,WS_GROUP
+    PUSHBUTTON      "&Delete",IDB_DELETE,224,5,50,14
+    LTEXT           "&Selected Auto Tests:",IDT_GROUP_INSTALLED,209,29,85,9
+    LISTBOX         IDL_INSTALLED,212,42,135,72,LBS_SORT |
+                    LBS_NOINTEGRALHEIGHT | LBS_EXTENDEDSEL | WS_VSCROLL |
+                    WS_TABSTOP
+    PUSHBUTTON      "&Add >",IDB_ADD,152,47,50,14,WS_GROUP
+    PUSHBUTTON      "< &Remove",IDB_REMOVE,152,69,50,14
+    DEFPUSHBUTTON   "&Close",IDCANCEL,152,99,50,14
+    LTEXT           "&Installed Auto Tests:",IDT_GROUP_AVAIL,3,29,85,9
+    LISTBOX         IDL_AVAILABLE,6,42,135,72,LBS_SORT |
+                    LBS_NOINTEGRALHEIGHT | LBS_EXTENDEDSEL | WS_VSCROLL |
+                    WS_TABSTOP
+END
+
+IDD_NEW_GROUP DIALOG DISCARDABLE  0, 0, 197, 57
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "New Test Group"
+FONT 8, "System Font"
+BEGIN
+    LTEXT           "Test &Group:",-1,6,14,42,8
+    EDITTEXT        IDE_GROUP,50,12,138,13,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,40,37,50,14,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,106,37,50,14
+END
+
+IDD_RUN_TESTS DIALOG DISCARDABLE  0, 0, 292, 197
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Run Auto Tests"
+FONT 8, "System Font"
+BEGIN
+    LTEXT           "Test &Sources:",-1,200,6,50,8
+    LISTBOX         IDL_SOURCES,204,18,78,133,LBS_SORT | LBS_MULTIPLESEL |
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    GROUPBOX        "Output",-1,7,110,54,42,WS_GROUP
+    CONTROL         "&Log file",IDX_LOG,"Button",BS_AUTOCHECKBOX | WS_GROUP |
+                    WS_TABSTOP,16,123,35,10
+    CONTROL         "Sc&reen",IDX_SCREEN,"Button",BS_AUTOCHECKBOX |
+                    WS_TABSTOP,16,137,35,10
+    GROUPBOX        "Options",-1,68,110,123,42,WS_GROUP
+    CONTROL         "&Debug",IDX_DEBUG,"Button",BS_AUTOCHECKBOX | WS_GROUP |
+                    WS_TABSTOP,73,122,35,10
+    CONTROL         "&Isolate tests",IDX_ISOLATE,"Button",BS_AUTOCHECKBOX |
+                    WS_TABSTOP,73,137,51,10
+    CONTROL         "&Cursor Library",IDX_CURSOR_LIB,"Button",BS_AUTO3STATE |
+                    WS_TABSTOP,128,122,55,10
+    PUSHBUTTON   	  "R&un Lists...",IDB_RUNLISTS,7,158,45,14,WS_GROUP
+    COMBOBOX        IDC_RUNLISTS,56,159,80,60,CBS_DROPDOWNLIST | CBS_SORT |
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Log &File...",IDB_LOG,7,177,45,14,WS_DISABLED |
+                    WS_GROUP
+    LTEXT           "AUTO.LOG",IDT_LOG,56,180,225,11,WS_DISABLED | NOT
+                    WS_GROUP
+    DEFPUSHBUTTON   "OK",IDOK,183,157,45,14,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,237,157,45,14
+    LTEXT           "Auto &Tests:",-1,4,6,50,8, WS_GROUP
+END
+
+IDD_RUN_LISTS DIALOG DISCARDABLE  0, 0, 167, 129
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Run Lists"
+FONT 8, "System Font"
+BEGIN
+    LTEXT           "Current:",-1,3,6,26,8
+    LTEXT           "<Default>",IDT_CURRENT,37,6,122,8,NOT WS_GROUP
+    LTEXT           "&Run Lists:",-1,3,17,30,8,NOT WS_GROUP
+    LISTBOX         IDL_RUNLISTS,4,28,89,72,LBS_SORT | LBS_NOINTEGRALHEIGHT |
+                    WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "&Close",IDCANCEL,109,25,50,14,WS_GROUP
+    PUSHBUTTON      "&Save",IDB_SAVE,109,44,50,15
+    PUSHBUTTON      "Save &As...",IDB_SAVEAS,109,65,50,14
+    PUSHBUTTON      "&Delete",IDB_DELETERL,109,86,50,14
+    PUSHBUTTON      "&From...",IDB_FROM,5,108,50,14,WS_GROUP
+    LTEXT           "Static",IDT_FROM,59,111,97,11
+END
+
+IDD_BROWSE DIALOG 8, 26, 157, 166
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Browse"
+FONT 8, "System Font"
+BEGIN
+	LTEXT			"", stc3, 6, 42, 76, 9, NOT WS_VISIBLE |
+                    WS_DISABLED
+    EDITTEXT        edt1, 6, 52, 90, 12, ES_AUTOHSCROLL | ES_OEMCONVERT |
+                    NOT WS_VISIBLE | WS_DISABLED
+    LISTBOX         lst1, 6, 68, 90, 68, LBS_SORT | LBS_OWNERDRAWFIXED |
+                    LBS_HASSTRINGS | LBS_DISABLENOSCROLL | NOT WS_VISIBLE |
+                    WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Directories:", -1, 6, 42, 92, 9
+    LTEXT           "", stc1, 6, 52, 92, 9, SS_NOPREFIX
+    LISTBOX         lst2, 6, 64, 92, 68, LBS_SORT | LBS_OWNERDRAWFIXED |
+                    LBS_HASSTRINGS | LBS_DISABLENOSCROLL | WS_VSCROLL |
+                    WS_TABSTOP
+	LTEXT			"", stc2, 6, 140, 90, 9, NOT
+                    WS_VISIBLE | WS_DISABLED
+    COMBOBOX        cmb1, 6, 150, 90, 36, CBS_DROPDOWNLIST | CBS_AUTOHSCROLL |
+                    NOT WS_VISIBLE | WS_DISABLED | WS_BORDER | WS_VSCROLL |
+                    WS_TABSTOP
+    LTEXT           "Dri&ves:", stc4, 6, 136, 92, 9
+    COMBOBOX        cmb2, 6, 146, 92, 68, CBS_DROPDOWNLIST |
+                    CBS_OWNERDRAWFIXED | CBS_AUTOHSCROLL | CBS_SORT |
+                    CBS_HASSTRINGS | WS_BORDER | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK", IDOK, 104, 65, 50, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 104, 82, 50, 14, WS_GROUP
+    PUSHBUTTON      "&Help", psh15, 104, 119, 50, 14, WS_GROUP
+	CONTROL 		"", chx1, "Button", BS_AUTOCHECKBOX | NOT
+                    WS_VISIBLE | WS_DISABLED | WS_GROUP | WS_TABSTOP, 104,
+                    146, 50, 12
+    LTEXT           "Select the source directory for Auto Test DLLs.",
+                    IDT_PROMPT, 6, 8, 145, 35
+END
+
+IDD_GETLOG DIALOG DISCARDABLE  36, 24, 264, 134
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Log File"
+FONT 8, "System Font"
+BEGIN
+    LTEXT           "File &Name:",stc3,6,6,76,9
+    EDITTEXT        edt1,6,16,90,12,ES_AUTOHSCROLL | ES_OEMCONVERT
+    LISTBOX         lst1,6,32,90,68,LBS_SORT | LBS_OWNERDRAWFIXED |
+                    LBS_HASSTRINGS | LBS_DISABLENOSCROLL | WS_VSCROLL |
+                    WS_TABSTOP
+    LTEXT           "&Directories:",-1,110,6,92,9
+    LTEXT           "",stc1,110,18,92,9,SS_NOPREFIX
+    LISTBOX         lst2,110,32,92,68,LBS_SORT | LBS_OWNERDRAWFIXED |
+                    LBS_HASSTRINGS | LBS_DISABLENOSCROLL | WS_VSCROLL |
+                    WS_TABSTOP
+    LTEXT           "List Files of &Type:",stc2,6,104,90,9
+    COMBOBOX        cmb1,6,114,90,36,CBS_DROPDOWNLIST | CBS_AUTOHSCROLL |
+                    WS_BORDER | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Dri&ves:",stc4,110,104,92,9
+    COMBOBOX        cmb2,110,114,92,68,CBS_DROPDOWNLIST | CBS_OWNERDRAWFIXED |
+                    CBS_AUTOHSCROLL | CBS_SORT | CBS_HASSTRINGS | WS_BORDER |
+                    WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,208,6,50,14,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,208,24,50,14,WS_GROUP
+    PUSHBUTTON      "&Help",pshHelp,208,46,50,14,WS_GROUP
+    CONTROL         "&Append",IDC_APPEND,"Button",BS_AUTOCHECKBOX |
+                    WS_TABSTOP,211,68,47,10
+
+END
+
+
+IDD_MANAGE_SOURCES DIALOG DISCARDABLE  0, 0, 202, 133
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Manage Test Sources"
+FONT 8, "System Font"
+BEGIN
+    LTEXT           "Test &Source:",IDT_TEST_SOURCES,6,8,45,8
+    COMBOBOX        IDC_SOURCES,53,7,143,60,CBS_DROPDOWNLIST |
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Connect &Parameters",IDT_PARMS,6,24,114,74,WS_GROUP
+    LTEXT           "DS&N:",IDT_DSN0,13,39,19,8,NOT WS_GROUP
+    COMBOBOX        IDC_DSN0,37,37,75,60,CBS_DROPDOWNLIST | CBS_AUTOHSCROLL |
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&UID:",IDT_UID0,15,60,17,8,NOT WS_GROUP
+    EDITTEXT        IDE_UID0,37,58,75,12,ES_AUTOHSCROLL
+    LTEXT           "P&WD:",IDT_PWD0,12,81,20,8,NOT WS_GROUP
+    EDITTEXT        IDE_PWD0,37,79,75,12,ES_AUTOHSCROLL
+    LTEXT           "&Keywords:",IDT_KEYWORDS,6,109,34,8
+    EDITTEXT        IDE_KEYWORDS,41,106,155,13,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "&Close",IDCANCEL,137,34,50,14,WS_GROUP
+    PUSHBUTTON      "N&ew...",IDB_NEW,137,55,50,14
+    PUSHBUTTON      "&Delete",IDB_DELETE,137,75,50,14
+END
+
+IDD_NEW_SOURCE DIALOG DISCARDABLE  0, 0, 208, 58
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "New Test Source"
+FONT 8, "System Font"
+BEGIN
+    LTEXT           "Test &Source:",-1,6,14,42,8
+    EDITTEXT        IDE_SOURCE,51,13,138,13,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,41,38,50,14,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,107,38,50,14
+END
+
+IDD_OPEN DIALOG DISCARDABLE  36, 24, 285, 143
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Log File"
+FONT 8, "System Font"
+BEGIN
+    LTEXT           "File &Name:",-1,8,10,39,8,NOT WS_GROUP
+    LTEXT           "&Directories:",-1,118,10,41,8,NOT WS_GROUP
+    LTEXT           "",IDD_CURDIR,118,25,98,8,NOT WS_GROUP
+    EDITTEXT        IDD_NAME,8,22,99,13,ES_OEMCONVERT
+    LISTBOX         IDD_FILELIST,8,40,100,66,LBS_SORT | WS_VSCROLL |
+                    WS_TABSTOP
+    LISTBOX         IDD_DIRLIST,118,40,99,65,LBS_SORT | WS_VSCROLL |
+                    WS_TABSTOP
+    CONTROL         "&Append",IDC_APPEND_FILE,"Button",BS_AUTOCHECKBOX |
+                    WS_TABSTOP,228,68,47,10
+    LTEXT           "List Files of &Type:",1089,9,112,90,9
+    COMBOBOX        IDD_FILE_TYPES,9,122,99,63,CBS_DROPDOWNLIST |
+                    CBS_AUTOHSCROLL | WS_BORDER | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Dri&ves:",1091,118,112,25,9
+    COMBOBOX        IDD_DRIVES,118,122,99,68,CBS_DROPDOWNLIST |
+                    CBS_AUTOHSCROLL | WS_BORDER | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "",IDD_DRIVES_TXT,145,111,98,8,NOT WS_GROUP
+    PUSHBUTTON      "&Network...",IDNETWORK,227,122,50,12,WS_GROUP
+    PUSHBUTTON      "OK",IDOK,226,10,50,12,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,226,24,50,12,WS_GROUP
+    PUSHBUTTON      "Help",IDHELP,226,38,50,12,WS_GROUP
+END

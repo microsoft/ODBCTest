@@ -1,0 +1,35 @@
+HEAPSIZE			5120
+SECTIONS
+EXPORTS
+	CenterDialog
+	DrawBitmap
+	GetLogFile
+	ManageGroups
+	ManageSources
+	ManageTests
+	RunAutoTest
+	szMessageBox
+	szLogPrintf
+	AbortRun
+	GetRCString
+	IsChicago
+	SetupFileInfo
+	AddAutoTest
+	LoadAutoTestDLL
+	UnLoadAutoTestDLL
+	FindAutoTestNode
+	DeleteAutoTestNode
+	DeleteAutoTestList
+	VerifyTestCaseCount
+	RefreshInstalledTestList
+	GetIniNameUsage
+	CElapsed
+	FAbortCheck
+	FindFileDir
+	CreateTestList
+	GetTestGroups
+	GetAutoTests
+	GetTestCases
+	ResetForRunList
+	GetSetLastRunInfo
+	SetGatorIniPath

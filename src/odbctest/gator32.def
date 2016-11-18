@@ -1,0 +1,12 @@
+HEAPSIZE	2048
+
+EXPORTS
+	ClearOutWndProc
+	ConnectWndProc
+	DialogWndProc
+	SetDftWndProc
+	AboutWndProc
+	WndProc
+	WinMain
+	StatusWndProc
+	ToolWndProc

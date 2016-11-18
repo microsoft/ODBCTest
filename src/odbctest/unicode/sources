@@ -1,0 +1,7 @@
+!include ..\sources.inc
+
+TARGETNAME=odbct32w
+LOCALIZE_NO_MUI=0  #Make DLL or EXE end up in the testbin directory
+C_DEFINES=$(C_DEFINES) -DUNICODE -D_UNICODE
+TARGETLIBS=$(TARGETLIBS) \
+           $(PROJROOT_OBJ)\ODBC\Tools\OdbcTest\gatortst\unicode\$(O)\gtrts32w.lib

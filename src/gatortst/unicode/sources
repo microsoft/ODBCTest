@@ -1,0 +1,5 @@
+!include ..\sources.inc
+
+TARGETNAME=gtrts32w
+LOCALIZE_NO_MUI=0  #Make DLL or EXE end up in the testbin directory
+C_DEFINES=$(C_DEFINES) -DUNICODE -D_UNICODE

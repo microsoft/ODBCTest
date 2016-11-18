@@ -1,0 +1,4 @@
+CreateFilesWithRetry(e:\sql11\public.build\lock) retry:0 Win32Error:0x5; try just deleting the file and if that fails use tlist or filemon or openfiles to find who has the file open
+2>warnings in directory e:\sql11\testsrc\ntdbms\sqlncli\odbc\tools\odbctest\gatortst\unicode
+2>e:\sql11\tools\vc\include\string.h(54) : warning RC4011: identifier truncated to '_CRT_SECURE_CPP_OVERLOAD_STANDA'
+2>e:\sql11\tools\vc\include\string.h(76) : warning RC4011: identifier truncated to '_CRT_SECURE_CPP_OVERLOAD_SECURE'

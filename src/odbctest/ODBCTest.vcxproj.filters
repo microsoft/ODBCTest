@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="bigint.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="blddata.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="connwin.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dlgbldr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dlgmngr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dlgparms.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dlgtmplt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dlgtools.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fhattr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fhbind.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fhcatl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fhconn.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fhdesc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fhdiag.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fhenv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fhhndl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fhinst.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fhlocatr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fhmisc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fhrslt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fhstmt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fileio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="globals.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gtrcomm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mem.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="optwin.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="outwin.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="picktype.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rsltwin.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="runtest.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="statbar.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="table.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="toolbar.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="usrwndp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="gator32.def">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="sources.inc">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\help\odbc.chi" />
+    <None Include="..\help\odbc.chm" />
+    <None Include="..\help\odbctest.chi" />
+    <None Include="..\help\odbctest.chm" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="bigint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="blddata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="connwin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dlgbldr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dlgdfts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dlgmngr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dlgparms.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dlgtmplt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dlgtools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fhenv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fhheader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fhinst.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="file.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fileio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="funchndl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gatortst.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="globals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gtrcomm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="handles.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="menus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="options.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="outwin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="paramidx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="picktype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rsltwin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="runtest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="statbar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="strings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="table.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="toolbar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\autotest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bitarray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\odbcss.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\odbcver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\portable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\standard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="gator.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

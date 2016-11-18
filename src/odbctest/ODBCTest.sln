@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ODBCTest", "ODBCTest.vcxproj", "{0C0FF459-0013-4816-A8A0-E01682170589}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D64BC2E7-2D3B-4A1C-84B0-7B5C2ADF87A0} = {D64BC2E7-2D3B-4A1C-84B0-7B5C2ADF87A0}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gatortst", "..\gatortst\gatortst.vcxproj", "{D64BC2E7-2D3B-4A1C-84B0-7B5C2ADF87A0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C0FF459-0013-4816-A8A0-E01682170589}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0C0FF459-0013-4816-A8A0-E01682170589}.Debug|Win32.Build.0 = Debug|Win32
+		{0C0FF459-0013-4816-A8A0-E01682170589}.Release|Win32.ActiveCfg = Release|Win32
+		{0C0FF459-0013-4816-A8A0-E01682170589}.Release|Win32.Build.0 = Release|Win32
+		{D64BC2E7-2D3B-4A1C-84B0-7B5C2ADF87A0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D64BC2E7-2D3B-4A1C-84B0-7B5C2ADF87A0}.Debug|Win32.Build.0 = Debug|Win32
+		{D64BC2E7-2D3B-4A1C-84B0-7B5C2ADF87A0}.Release|Win32.ActiveCfg = Release|Win32
+		{D64BC2E7-2D3B-4A1C-84B0-7B5C2ADF87A0}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
