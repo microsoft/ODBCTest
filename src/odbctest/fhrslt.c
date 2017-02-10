@@ -85,6 +85,39 @@ VOID INTFUN DoCreateResults(lpCONNECTIONINFO lpci, lpSTATEMENTINFO lpStmt,
 
 
 
+//*---------------------------------------------------------------------------------
+//| DropNestedHandles:
+//|	This function drops nested stmt handes on fetch
+//| Parms:
+//|	lpStmt			pointer to SI struct
+//| Returns:
+//*---------------------------------------------------------------------------------
+RETCODE INTFUN DropNestedHandles(lpCONNECTIONINFO ci, lpSTATEMENTINFO lpStmt)
+{
+	// drop child stmts
+	if (lpStmt && lpStmt->lpStmtChildren)
+	{
+		while (lpStmt->lpStmtChildren)
+		{
+			RETCODE 		rc;
+			lpSTATEMENTINFO lpStmtChild = lpStmt->lpStmtChildren;
+
+			//For ODBC >= 3.0 use SQLFreeHandle()
+			if (lpUsrOptions->nODBCVer >= IDR_ODBCVER_30)
+				rc = SQLFreeHandle(SQL_HANDLE_STMT, lpStmtChild->hstmt);
+			else
+				rc = SQLFreeStmt(lpStmtChild->hstmt, SQL_DROP);
+
+			if (RC_NOTSUCCESSFUL(rc))
+				return rc;
+
+			DoDropStmt(ci, lpStmtChild);
+		}
+
+		lpStmt->lpStmtChildren = NULL;
+	}
+	return SQL_SUCCESS;
+}
 
 //*---------------------------------------------------------------------------------
 //| DisplayRowset:
@@ -961,6 +994,12 @@ RETCODE INTFUN lpSQLFetch(STD_FH_PARMS)
 	// Log input parameters
 	LOGPARAMETERS(szFuncName, lpParms, cParms, ci, TRUE);
 
+	// drop nested handles
+	if (lpStmt)
+	{
+		rc = DropNestedHandles(ci, lpStmt);
+	}
+
 	// Invoke function
 	rc = SQLFetch(hstmt);
 
@@ -1097,6 +1136,11 @@ RETCODE INTFUN lpSQLExtendedFetch(STD_FH_PARMS)
 	}
 
 
+	// drop nested handles
+	if (lpStmt)
+	{
+		rc = DropNestedHandles(ci, lpStmt);
+	}
 
 	// Invoke function
 	rc = SQLExtendedFetch(hstmt,
@@ -1225,6 +1269,11 @@ RETCODE INTFUN lpSQLFetchScroll(STD_FH_PARMS)
 		}
 	}
 
+	// drop nested handles
+	if (lpStmt)
+	{
+		rc = DropNestedHandles(ci, lpStmt);
+	}
 
 	// Invoke function
 	rc = SQLFetchScroll(hstmt,
@@ -1474,6 +1523,112 @@ RETCODE INTFUN lpSQLGetData(STD_FH_PARMS)
 
 
 //*---------------------------------------------------------------------------------
+//| lpSQLGetNestedHandle:
+//| Parms:
+//|	lpDlg						The dialog descriptor
+//|	ci							Current connection information (always NULL)
+//|	lpParms					Pointer to the paramter array to use for the request
+//| Returns:
+//|	The return code from the function
+//*---------------------------------------------------------------------------------
+RETCODE INTFUN lpSQLGetNestedHandle(STD_FH_PARMS)
+{
+	RETCODE		rc=0;
+	HSTMT			hstmt = NULL;
+	SQLHANDLE		hOutHandle = NULL;
+	lpCONNECTIONINFO	lpCi=ci;
+	HWND					hwndOut = GETOUTPUTWINDOW(ci);
+
+
+	if (lpParms[0]->lpData)
+		hstmt = *(HSTMT *)lpParms[0]->lpData;
+	SWORD			icol = *(UWORD *)lpParms[1]->lpData;
+
+	BUILDOUTPUTPARM(lpParms[2], 							// Allocate OutputHandlePtr
+		sizeof(UDWORD),						//  based on cbValueMax
+		lpUsrOptions->fBufferChecking);
+
+	// Log input parameters
+	LOGPARAMETERS(szFuncName, lpParms, cParms, ci, TRUE);
+
+	// Invoke function
+	rc = SQLGetNestedHandle(hstmt,
+        icol,	// nColParam
+		lpParms[2]->fNull ? SQL_NULL_HANDLE : lpParms[2]->lpData);		// nested handle
+
+	if (lpParms[2]->lpData)
+		hOutHandle = *(SQLHANDLE *)lpParms[2]->lpData;
+
+	lpParms[2]->fHandle = PT_PTR_PTR;
+
+	if (RC_SUCCESSFUL(rc))
+	{
+		lpSTATEMENTINFO	lpState = DoAllocStmt(lpCi, hOutHandle);
+
+		// add to parents list of child stmts
+		lpSTATEMENTINFO lpStateParent = FindSINode(ci, hstmt);
+
+		if(lpStateParent)
+		{
+			lpState->lpStmtParent = lpStateParent;
+			
+			if (lpStateParent->lpStmtChildren)
+			{
+				// Insert at end of list
+				lpStateParent->lpStmtChildren->prevChild->nextChild = lpState;
+				lpState->prevChild = lpStateParent->lpStmtChildren->prevChild;
+				lpState->nextChild = lpStateParent->lpStmtChildren;
+				lpStateParent->lpStmtChildren->prevChild = lpState;
+			}
+			else
+			{
+				// Only one in the list
+				lpStateParent->lpStmtChildren = lpState;
+				lpState->nextChild = lpState;
+				lpState->prevChild = lpState;
+			}
+		}
+	}
+	
+	if (lpCi)
+		lpCi->hstmtCurr= hOutHandle;
+
+	// Log return code information
+	LOGRETURNCODE(NULL, ci, rc);
+
+	// Log output parameters
+	LOGPARAMETERS(szFuncName, lpParms, cParms, ci, FALSE);
+
+	//If SQL_ERROR then the DM should have changed the
+	//output handle to SQL_NULL_HANDLE
+	if (RC_ERROR(rc) && lpParms[2]->lpData)
+	{
+		if (*(SQLHANDLE *)lpParms[2]->lpData != SQL_NULL_HANDLE)
+		{
+			TCHAR str[LARGEBUFF] = TEXT(""),
+				szMsg[LARGEBUFF] = TEXT("");
+
+			lstrcpy(str, lpParms[2]->szName);
+			// Remove the '&' and ':' chars
+			RemoveDlgFormat(str);
+
+			szPrintf(lpUsrOptions, hwndOut, MSG_SEV1, TRUE, TRUE,
+				GetGtrString(szMsg, sizeof(szMsg) / sizeof(szMsg[0]), TST1022), str);
+		}
+
+	}
+
+	// Null termination and buffer modification checking
+	OUTPUTPARAMCHECK(ci, rc, lpParms, cParms, TRUE);
+
+	//  Check for errors
+	AUTOLOGERRORSI(ci, rc, hstmt);
+
+	return rc;
+}
+
+
+//*---------------------------------------------------------------------------------
 //| lpSQLMoreResults:
 //|	Successful completion means we have a new results set to display. This will
 //|	cause the current results set to be destroyed.
@@ -1518,6 +1673,45 @@ RETCODE INTFUN lpSQLMoreResults(STD_FH_PARMS)
 	return rc;
 }
 
+
+//*---------------------------------------------------------------------------------
+//| lpSQLNextColumn:
+//| Parms:
+//|	lpDlg						The dialog descriptor
+//|	ci							Current connection information (always NULL)
+//|	lpParms					Pointer to the paramter array to use for the request
+//| Returns:
+//|	The return code from the function
+//*---------------------------------------------------------------------------------
+RETCODE INTFUN lpSQLNextColumn(STD_FH_PARMS)
+{
+	RETCODE		rc=0;
+	HSTMT			hstmt = NULL;
+
+	if (lpParms[0]->lpData)
+		hstmt = *(HSTMT *)lpParms[0]->lpData;
+
+	// Log input parameters
+	LOGPARAMETERS(szFuncName, lpParms, cParms, ci, TRUE);
+
+	// Invoke function
+	rc = SQLNextColumn(hstmt,
+        (SQLSMALLINT *)lpParms[1]->lpData);	// pnColParam
+
+	// Log return code information
+	LOGRETURNCODE(NULL, ci, rc);
+
+	// Log output parameters
+	LOGPARAMETERS(szFuncName, lpParms, cParms, ci, FALSE);
+
+	// Null termination and buffer modification checking
+	OUTPUTPARAMCHECK(ci, rc, lpParms, cParms, TRUE);
+
+	//  Check for errors
+	AUTOLOGERRORSI(ci, rc, hstmt);
+
+	return rc;
+}
 
 //*---------------------------------------------------------------------------------
 //| lpSQLSetScrollOptions:

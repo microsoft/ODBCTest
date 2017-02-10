@@ -373,6 +373,13 @@ typedef struct tagSTATEMENTINFO {
 	// Linked list information
 	struct tagSTATEMENTINFO * next;					//	Next HSTMT on this HDBC
 	struct tagSTATEMENTINFO * prev;					// Previous HSTMT on this HDBC
+
+	// nested handle tracking
+	struct tagSTATEMENTINFO * lpStmtChildren;				// Pointer to linked list of child HSTMT nodes
+	struct tagSTATEMENTINFO * nextChild;					// Next child HSTMT
+	struct tagSTATEMENTINFO * prevChild;					// Previous child HSTMT
+	struct tagSTATEMENTINFO * lpStmtParent;					// Pointer to parent HSTMT, NULL if none
+
 	} STATEMENTINFO, * lpSTATEMENTINFO;
 
 

@@ -22,6 +22,18 @@
 #include "fhheader.h"
 #include "resource.h"
 
+/*
+int _imp___vsnprintf(
+	char *buffer,
+	size_t count,
+	const char *format,
+	va_list argptr
+)
+{
+	return vsnprintf(buffer, count, format, argptr);
+}
+*/
+
 
 extern const ODBCAPI_LIST rgApiList[NUM_ODBC_APIS] = {
 			//iAPINum,								iOrdinalNum,							szAPIName,											szName										fODBC30			iDD
@@ -152,6 +164,8 @@ extern const ODBCAPI_LIST rgApiList[NUM_ODBC_APIS] = {
 /*116*/	{IDM_SQLWRITEFILEDSN,				API_SQLWRITEFILEDSN				,TEXT("IDM_SQLWRITEFILEDSN"),						TEXT("SQLWriteFileDSN"),			TRUE,				IDD_SQLWRITEFILEDSN},
 /*117*/	{IDM_SQLGETCONFIGMODE,				API_SQLGETCONFIGMODE				,TEXT("IDM_SQLGETCONFIGMODE"),					TEXT("SQLGetConfigMode"),			TRUE,				IDD_SQLGETCONFIGMODE},
 /*118*/	{IDM_SQLSETCONFIGMODE,				API_SQLSETCONFIGMODE				,TEXT("IDM_SQLSETCONFIGMODE"),					TEXT("SQLSetConfigMode"),			TRUE,				IDD_SQLSETCONFIGMODE},
+/*119*/ {SQL_API_SQLNEXTCOLUMN,             API_SQLNEXTCOLUMN                   ,TEXT("SQL_API_SQLNEXTCOLUMN"),                 TEXT("SQLNextColumn"),              FALSE,              IDD_SQLNEXTCOLUMN },
+/*120*/ {SQL_API_SQLGETNESTEDHANDLE,		API_SQLGETNESTEDHANDLE				,TEXT("SQL_API_SQLGETNESTEDHANDLE"),			TEXT("SQLGetNestedHandle"),				FALSE,				IDD_SQLGETNESTEDHANDLE },
 };
 
 

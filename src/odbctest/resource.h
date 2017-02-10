@@ -78,6 +78,11 @@
 #define IDE_GCN_CBCURSORMAX             342
 #define IDCK_GCN_PCBCURSOR              343
 #define IDCK_GCN_HSTMT                  344
+#define IDD_SQLNEXTCOLUMN               350
+#define IDD_SQLGETNESTEDHANDLE          351
+#define IDE_GNH_ICOL                   	352
+#define IDCK_GNH_HSTMT                 	353
+#define IDCK_GNH_OUTPUTHANDLE           354
 #define IDD_SQLNUMRESULTCOLS            360
 #define IDCK_NRC_PCCOL                  361
 #define IDCK_NRC_HSTMT                  362
@@ -792,6 +797,7 @@
 #define IDD_SQLPOSTINSTALLERERROR       	2836
 #define IDD_SQLREADFILEDSN              	2837
 #define IDD_SQLWRITEFILEDSN             	2838
+#define IDR_FC_ODBC40                   	2839
 #define IDD_INTERVAL_STRUCT					2900
 #define IDE_INTERVAL_YEAR						2901
 #define IDE_INTERVAL_MONTH						2902

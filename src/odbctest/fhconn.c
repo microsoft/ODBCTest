@@ -39,6 +39,7 @@ extern HMENU						hMenu;								// Menu handle for Trace item
 extern LPTSTR				szTestHelpFile;
 extern int					iApiHelpCnt, iTestHelpCnt;		// How many times have we called these?
 extern lpHEADENV					lpHeadEnv;
+extern TCHAR						szSQL_OV_ODBC4[];
 extern TCHAR						szSQL_OV_ODBC3[];
 extern TCHAR						szSQL_OV_ODBC2[];
 extern TCHAR						szSQL_ATTR_ODBC_VERSION[];
@@ -924,7 +925,12 @@ VOID INTFUN SetODBCBehavior(lpCONNECTIONINFO lpci, HENV henv,LPTSTR szODBCVer)
 	if (lpUsrOptions->fODBCBehavior == IDR_FC_DEFAULT)
 		return;
 
-	if (lpUsrOptions->fODBCBehavior == IDR_FC_ODBC30)
+	if (lpUsrOptions->fODBCBehavior == IDR_FC_ODBC40)
+	{
+		lstrcpy(szOption,szSQL_OV_ODBC4);
+		udVer=SQL_OV_ODBC4;
+	}
+	else if (lpUsrOptions->fODBCBehavior == IDR_FC_ODBC30)
 	{
 		lstrcpy(szOption,szSQL_OV_ODBC3);
 		udVer=SQL_OV_ODBC3;
@@ -1922,6 +1928,7 @@ VOID INTFUN EnableDisableODBCBehaviorGroup(HWND hDlg,BOOL fEnable)
 	EnableWindow(GetDlgItem(hDlg,IDR_FC_DEFAULT),fEnable);
 	EnableWindow(GetDlgItem(hDlg,IDR_FC_ODBC2X),fEnable);
 	EnableWindow(GetDlgItem(hDlg,IDR_FC_ODBC30),fEnable);
+	EnableWindow(GetDlgItem(hDlg,IDR_FC_ODBC40),fEnable);
 }
 
 
@@ -1955,7 +1962,7 @@ LRESULT EXTFUN GetConnectInfoWndProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM 
 			EnableWindow(GetDlgItem(hDlg,IDC_NEWHENV),fEnable);
 
 			//Check ODBC Behavior
-			CheckRadioButton(hDlg, IDR_FC_DEFAULT, IDR_FC_ODBC30,
+			CheckRadioButton(hDlg, IDR_FC_DEFAULT, IDR_FC_ODBC40,
 								lpUsrOptions->fODBCBehavior);
 
 			//Check Cursor Library button
@@ -2009,10 +2016,15 @@ LRESULT EXTFUN GetConnectInfoWndProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM 
 						lpUsrOptions->fODBC30=FALSE;
 						lpUsrOptions->fODBCBehavior = IDR_FC_ODBC2X;
 					}
+					else if (IsDlgButtonChecked(hDlg, IDR_FC_ODBC30))
+					{
+						lpUsrOptions->fODBC30 = TRUE;
+						lpUsrOptions->fODBCBehavior = IDR_FC_ODBC30;
+					}
 					else
 					{
-						lpUsrOptions->fODBC30=TRUE;
-						lpUsrOptions->fODBCBehavior = IDR_FC_ODBC30;
+						lpUsrOptions->fODBC30 = TRUE;
+						lpUsrOptions->fODBCBehavior = IDR_FC_ODBC40;
 					}
 
 					// Chec cursor lib option by looking at buttons

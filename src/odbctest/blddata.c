@@ -3610,6 +3610,7 @@ BOOL INTFUN OutputBufferCheck(lpCONNECTIONINFO ci, RETCODE rc, LPCTSTR szName, v
 	case SQL_SUCCESS:
 	case SQL_SUCCESS_WITH_INFO:
 	case SQL_NEED_DATA:
+	case SQL_DATA_AVAILABLE:
 		if ((uFlags & PT_OUT_NOTMODIFIED)
 			&& (uFlags & (PT_LOG_OUT | PT_LOG_IO))
 			&& !(uFlags & PT_OUT_NOMODIFY_OK))

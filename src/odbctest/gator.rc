@@ -164,7 +164,9 @@ BEGIN
       MENUITEM "SQLE&xtendedFetch...",        API_SQLEXTENDEDFETCH
       MENUITEM "SQL&SetPos...",               API_SQLSETPOS
       MENUITEM "SQL&GetData...",              API_SQLGETDATA
+      MENUITEM "SQLGetNested&Handle...",      API_SQLGETNESTEDHANDLE
       MENUITEM "SQL&MoreResults...",          API_SQLMORERESULTS
+      MENUITEM "SQL&NextColumn...",           API_SQLNEXTCOLUMN
       MENUITEM "SQLS&etScrollOptions...",     API_SQLSETSCROLLOPTIONS
       MENUITEM SEPARATOR
       MENUITEM "Describe C&ol All",           IDM_DESCRIBE_COL_ALL
@@ -393,7 +395,9 @@ BEGIN
       MENUITEM "SQL&Fetch...",                API_SQLFETCH
       MENUITEM "SQLFetc&hScroll...",          API_SQLFETCHSCROLL
       MENUITEM "SQL&GetData...",              API_SQLGETDATA
+      MENUITEM "SQLGetNested&Handle...",      API_SQLGETNESTEDHANDLE
       MENUITEM "SQL&MoreResults...",          API_SQLMORERESULTS
+      MENUITEM "SQL&NextColumn...",           API_SQLNEXTCOLUMN
       MENUITEM "SQL&NumResultCols...",        API_SQLNUMRESULTCOLS
       MENUITEM "SQL&RowCount...",             API_SQLROWCOUNT
       MENUITEM "SQL&SetPos...",               API_SQLSETPOS
@@ -638,7 +642,9 @@ BEGIN
       MENUITEM "SQL&Fetch...",                API_SQLFETCH
       MENUITEM "SQLFetc&hScroll...",          API_SQLFETCHSCROLL
       MENUITEM "SQL&GetData...",              API_SQLGETDATA
+      MENUITEM "SQLGetNested&Handle...",      API_SQLGETNESTEDHANDLE
       MENUITEM "SQL&MoreResults...",          API_SQLMORERESULTS
+      MENUITEM "SQL&NextColumn...",           API_SQLNEXTCOLUMN
       MENUITEM "SQL&NumResultCols...",        API_SQLNUMRESULTCOLS
       MENUITEM "SQL&RowCount...",             API_SQLROWCOUNT
       MENUITEM "SQL&SetPos...",               API_SQLSETPOS
@@ -926,7 +932,7 @@ BEGIN
                   WS_TABSTOP,208,68,50,12
 END
 
-IDD_FULL_CONNECT DIALOG DISCARDABLE  83, 21, 225, 189
+IDD_FULL_CONNECT DIALOG DISCARDABLE  83, 21, 225, 203
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Full Connect"
 FONT 8, "MS Shell Dlg"
@@ -940,24 +946,26 @@ BEGIN
   EDITTEXT        IDE_USERID,53,145,79,13,ES_AUTOHSCROLL
   LTEXT           "&Password:",IDC_STATIC,9,169,36,10
   EDITTEXT        IDE_PASSWORD,53,166,79,13,ES_PASSWORD | ES_AUTOHSCROLL
-  GROUPBOX        "ODBC B&ehavior",IDG_ODBC_BEHAVIOR_GROUP,143,37,73,58,
+  GROUPBOX        "ODBC B&ehavior",IDG_ODBC_BEHAVIOR_GROUP,143,37,73,72,
                   WS_GROUP
   CONTROL         "De&fault",IDR_FC_DEFAULT,"Button",BS_AUTORADIOBUTTON |
                   WS_GROUP | WS_TABSTOP,148,52,43,10
+  CONTROL         "O&DBC 4.0",IDR_FC_ODBC40,"Button",BS_AUTORADIOBUTTON,
+                  148,94,52,10
   CONTROL         "OD&BC 3.0",IDR_FC_ODBC30,"Button",BS_AUTORADIOBUTTON,
                   148,80,52,10
   CONTROL         "ODBC 2.&0",IDR_FC_ODBC2X,"Button",BS_AUTORADIOBUTTON,
                   148,66,52,10
-  GROUPBOX        "Cursor &Library",IDG_CURSOR_LIBRARY_GROUP,143,98,73,81,
+  GROUPBOX        "Cursor &Library",IDG_CURSOR_LIBRARY_GROUP,143,112,73,81,
                   WS_GROUP
   CONTROL         "Defaul&t",IDR_CL_DEFAULT,"Button",BS_AUTORADIOBUTTON |
-                  WS_GROUP | WS_TABSTOP,147,113,35,10
+                  WS_GROUP | WS_TABSTOP,147,127,35,10
   CONTROL         "Use &If Needed",IDR_CL_USE_IF_NEEDED,"Button",
-                  BS_AUTORADIOBUTTON,147,129,58,10
+                  BS_AUTORADIOBUTTON,147,143,58,10
   CONTROL         "Use &ODBC",IDR_CL_USE_ODBC,"Button",BS_AUTORADIOBUTTON,
-                  147,145,55,10
+                  147,159,55,10
   CONTROL         "Use D&river",IDR_CL_USE_DRIVER,"Button",
-                  BS_AUTORADIOBUTTON,147,161,46,10
+                  BS_AUTORADIOBUTTON,147,175,46,10
   PUSHBUTTON      "OK",IDOK,87,8,40,14,WS_GROUP
   PUSHBUTTON      "Cancel",IDCANCEL,132,8,40,14
   PUSHBUTTON      "&Help",9,177,8,40,14
@@ -1275,6 +1283,20 @@ BEGIN
   PUSHBUTTON      "OK",IDOK,111,5,40,14
   PUSHBUTTON      "Cancel",IDCANCEL,156,5,40,14
   PUSHBUTTON      "&Help",9,201,5,40,14
+END
+
+IDD_SQLNEXTCOLUMN DIALOG DISCARDABLE  0, 0, 248, 60
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "SQLNextColumn"
+FONT 8, "MS Shell Dlg"
+BEGIN
+  CONTROL         "&ColumnParamNumberPtr:",IDCK_NRC_PCCOL,"Button",
+                  BS_AUTOCHECKBOX | WS_TABSTOP,8,43,231,10
+  CONTROL         "&StatementHandle:",IDCK_NRC_HSTMT,"Button",
+                  BS_AUTOCHECKBOX | WS_TABSTOP,8,29,232,10
+  PUSHBUTTON      "OK",IDOK,113,5,40,14
+  PUSHBUTTON      "Cancel",IDCANCEL,158,5,40,14
+  PUSHBUTTON      "&Help",9,203,5,40,14
 END
 
 IDD_SQLNUMRESULTCOLS DIALOG DISCARDABLE  0, 0, 248, 60
@@ -1875,6 +1897,23 @@ IDD_SQLGETSTMTATTR DIALOG DISCARDABLE  0, 0, 289, 113
      PUSHBUTTON      "Cancel",IDCANCEL,185,6,40,14
      PUSHBUTTON      "&Help",9,230,6,40,14
  END
+
+IDD_SQLGETNESTEDHANDLE DIALOG DISCARDABLE  0, 0, 248, 101
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "SQLGetNestedHandle"
+FONT 8, "MS Shell Dlg"
+BEGIN
+  LTEXT           "&ColumnParamNumberPtr:",-1,8,42,57,9
+  EDITTEXT        IDE_GNH_ICOL,70,41,30,12,ES_AUTOHSCROLL
+  CONTROL         "&ParentStatementHandle:",IDCK_GNH_HSTMT,"Button",
+                  BS_AUTOCHECKBOX | WS_TABSTOP,8,29,232,10
+  CONTROL         "&OutputChildStatementHandle:",IDCK_GNH_OUTPUTHANDLE,"Button",
+                  BS_AUTOCHECKBOX | WS_TABSTOP,8,56,211,10
+  PUSHBUTTON      "OK",IDOK,113,5,40,14
+  PUSHBUTTON      "Cancel",IDCANCEL,158,5,40,14
+  PUSHBUTTON      "&Help",9,203,5,40,14
+END
+
 
  IDD_SQLGETFUNCTIONS DIALOG DISCARDABLE  0, 0, 287, 63
  STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
@@ -4475,6 +4514,7 @@ BEGIN
   IDM_SQLDRIVERCONNECT    "Establishes a connection interactively, possibly with more parameters"
   IDM_SQLGETCONNECTOPTION "Retrieves connection options"
   IDM_SQLGETDATA          "Returns data from a single column of the current row of the result set"
+  IDM_SQLGETNESTEDHANDLE  "Returns child stmt handle from a single column of the current row of the result set"
   IDM_SQLGETFUNCTIONS     "Retrieves support status of an ODBC function"
   IDM_SQLGETINFO          "Retrieves driver and other specific data"
   IDM_SQLGETSTMTOPTION    "Retrieves statement options"
@@ -4508,6 +4548,7 @@ BEGIN
   IDM_SQLFREEENV          "Frees an environment handle"
   IDM_SQLFREESTMT         "Frees a statement handle"
   IDM_SQLGETCURSORNAME    "Retrieves the cursor name associated with an active HSTMT"
+  IDM_SQLNEXTCOLUMN       "Returns the number of next column or parameter available associated with an HSTMT"
   IDM_SQLNUMRESULTCOLS    "Returns the number of result columns associated with an HSTMT"
   IDM_SQLPREPARE          "Prepares an SQL string for execution"
 END

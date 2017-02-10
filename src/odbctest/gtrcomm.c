@@ -252,7 +252,7 @@ VOID INTFUN TruncateEditContents(HWND hwnd)
 //|	Returns:
 //|		TRUE if successful, FALSE on a failure
 //*------------------------------------------------------------------------
-BOOL INTFUN DoszWrite(HWND hwnd, LPTSTR str)
+BOOL INTFUN DoszWrite2(HWND hwnd, LPTSTR str)
 {
 #define MAXFLUSH		500
 	WORD				newlen=(WORD)lstrlen(str);
@@ -390,7 +390,7 @@ UINT CDECL szPrintf(lpUSROPTIONS lpUsrOpts, HWND hwnd, UINT uSev,
 	}
 
 	// Write to the edit window
-	rtn = DoszWrite(hwnd, (fFormat) ? (LPTSTR)szBuffer : szFmt);
+	rtn = DoszWrite2(hwnd, (fFormat) ? (LPTSTR)szBuffer : szFmt);
 
 	// If this string should be logged, verify we are tracing at this time
 	if(fCheckLog && lpUsrOpts->fTrace)

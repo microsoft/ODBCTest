@@ -57,6 +57,9 @@ extern lpDFTARRAY	lpdftfSetStmtAtr;
 extern UINT			cifSetStmtAtr;
 extern lpDFTARRAY	lpdftCTypesNoD;
 extern UINT			ciCTypesNoD;
+extern lpDFTARRAY	lpdftTypeExceptionBehavior;
+extern UINT			ciTypeExceptionBehavior;
+
 dCSEG(TCHAR) szCURSORATRHELP[]		= TEXT("Cursor Attributes");
 
 #define INVALID_NUMBER	-1

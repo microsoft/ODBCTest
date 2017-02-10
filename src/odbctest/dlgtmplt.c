@@ -494,11 +494,26 @@ CONTROL lptSQLGetData[] = {
 	IDCK_GD_HSTMT	,	0,						DLG_CKBOX,	NULL,						idsHstmt,				0,			0,	CBO_DFT_ODBC_HANDLE,	0,		0,								NULL,						0,0,
 	};
 
+CONTROL lptSQLGetNestedHandle[] = {
+	//	wID	lStyle				type			szText					uDescID					uFormatStyle			iParmNum	lDataStyle				wLengthID	fUpdated	lpUsrWndProc    wDataID	fValidate
+	//	----	-----------------	-----------	--------------------	--------------------	--------------------	--------	--------------------	-----------	--------	--------------
+	IDE_GNH_ICOL		,	0,						DLG_EDIT,	NULL,						idsicol,				0,			1,	0,							0,		0,								NULL,						0,0,
+	IDCK_GNH_OUTPUTHANDLE,0, 					DLG_CKBOX,	NULL,						idsHOutput, 		   0,							2,			0,							0,				0,			NULL,							0,0,
+	IDCK_GNH_HSTMT	,	0,						DLG_CKBOX,	NULL,						idsHstmt,				0,			0,	CBO_DFT_ODBC_HANDLE,	0,		0,								NULL,						0,0,
+};
+
 CONTROL lptSQLMoreResults[] = {
 //	wID				lStyle				type			szText					uDescID					uFormatStyle			iParmNum	lDataStyle				wLengthID	fUpdated	lpUsrWndProc    wDataID	fValidate
 //	----				-----------------	-----------	--------------------	--------------------	--------------------	--------	--------------------	-----------	--------	--------------
 	IDCK_MR_HSTMT,	0,						DLG_CKBOX,	NULL,						idsHstmt,				0,							0,			CBO_DFT_ODBC_HANDLE,	0,				0,			NULL,							0,0,
 	};
+
+CONTROL lptSQLNextColumn[] = {
+	//	wID	lStyle				type			szText					uDescID					uFormatStyle			iParmNum	lDataStyle				wLengthID	fUpdated	lpUsrWndProc    wDataID	fValidate
+	//	----	-----------------	-----------	--------------------	--------------------	--------------------	--------	--------------------	-----------	--------	--------------
+	IDCK_NRC_PCCOL, 0, DLG_CKBOX, NULL, idspccol, 0, 1, 0, 0, 0, NULL, 0, 0,
+	IDCK_NRC_HSTMT, 0, DLG_CKBOX, NULL, idsHstmt, 0, 0, CBO_DFT_ODBC_HANDLE, 0, 0, NULL, 0, 0,
+};
 
 CONTROL lptSQLSetScrollOptions[] = {
 //	wID	lStyle				type			szText					uDescID					uFormatStyle			iParmNum	lDataStyle				wLengthID	fUpdated	lpUsrWndProc   wDataID	fValidate
@@ -1652,6 +1667,8 @@ struct {
 /*116*/Initlpt(SQLWriteFileDSN),
 /*117*/Initlpt(SQLGetConfigMode),
 /*118*/Initlpt(SQLSetConfigMode),
+/*119*/Initlpt(SQLNextColumn),
+/*120*/Initlpt(SQLGetNestedHandle),
 };
 
 //*---------------------------------------------------------------------------------

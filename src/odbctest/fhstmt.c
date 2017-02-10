@@ -37,6 +37,9 @@ extern TCHAR						szSQL_CURSOR_FORWARD_ONLY[];
 extern TCHAR						szSQL_CURSOR_KEYSET_DRIVEN[];
 extern TCHAR						szSQL_CURSOR_DYNAMIC[];
 extern TCHAR						szSQL_CURSOR_STATIC[];
+extern TCHAR						szSQL_TE_ERROR[];
+extern TCHAR						szSQL_TE_REPORT[];
+extern TCHAR						szSQL_TE_CONTINUE[];
 
 
 dCSEG(TCHAR) szRow[]						= TEXT(" Row,");
@@ -138,7 +141,9 @@ lpSTATEMENTINFO INTFUN DoAllocStmt(lpCONNECTIONINFO ci, HSTMT hstmt)
 	lpState->fSetPos = FALSE;						// clear the SQL_NEED_DATA flag for SQLSetPos
 	lpState->ParamDataCType = SQL_C_CHAR;		// Default C Type for SQLPutData calls without preceeding SQLParamData
 	lpState->fAutoDisplay=lpUsrOptions->fAutoDisplay;
-
+	lpState->lpStmtParent=NULL;
+	lpState->lpStmtChildren=NULL;
+	
 	// Finally add the new node to the mini-tool bar of hstmts
 	AddNodeToToolBar(lpState->uStmtNum,(HANDLE)hstmt,ci->hwndStmts,szHSTMT);
 
@@ -207,6 +212,15 @@ VOID INTFUN DoDropStmt(lpCONNECTIONINFO ci,lpSTATEMENTINFO lpState)
 {
 	DWORD		dwIndex=0;
 
+	// drop child stmts
+	if(lpState && lpState->lpStmtChildren)
+	{
+		while(lpState->lpStmtChildren)
+		{
+			DoDropStmt(ci,lpState->lpStmtChildren);
+		}
+	}
+
 	dwIndex=FindIndexInDropDown(ci->hwndStmts,lpState->hstmt,lpState->uStmtNum,szHSTMT);
 
 	// Remove the hstmt from the combo box
@@ -216,6 +230,29 @@ VOID INTFUN DoDropStmt(lpCONNECTIONINFO ci,lpSTATEMENTINFO lpState)
 	if(lpState->lpResults)
 		DestroyResultWindow((lpRESULTWININFO)lpState->lpResults,TRUE);
 
+	// remove from parents stmt list
+	if (lpState->lpStmtParent)
+	{
+		lpSTATEMENTINFO lpStateParent = lpState->lpStmtParent;
+		
+		if(lpState->nextChild != lpState)
+		{
+			// More than one node
+			lpState->prevChild->nextChild = lpState->nextChild;
+			lpState->nextChild->prevChild = lpState->prevChild;
+		
+			// Removing head node?
+			if(lpStateParent->lpStmtChildren == lpState)
+				lpStateParent->lpStmtChildren = lpState->nextChild;
+		}
+		else
+		{
+			// Removing only node
+			lpStateParent->lpStmtChildren = NULL;
+		}
+	}
+
+	// remove from ci stmt list
 	if(lpState->next != lpState)
 	{
 		// More than one node

@@ -75,6 +75,8 @@ lpDFTARRAY	lpdftdfParamcbValues = (lpDFTARRAY)lpdfParamcbValues;
 UINT			cidfParamcbValues = NumItems(lpdfParamcbValues);
 lpDFTARRAY	lpdftdfParamrgbValues = (lpDFTARRAY)lpdfParamrgbValues;
 UINT			cidfParamrgbValues = NumItems(lpdfParamrgbValues);
+lpDFTARRAY	lpdftTypeExceptionBehavior = (lpDFTARRAY)lpdTypeExceptionBehavior;
+UINT			ciTypeExceptionBehavior = NumItems(lpdTypeExceptionBehavior);
 
 
 UINT	ciSQLTrueFalse30 = NumItems(lpdSQLTrueFalse30);
@@ -510,6 +512,14 @@ PARAMITEM lpmSQLExtendedFetch[] = {
 	TEXT(" "),						PT_NONE,							0,						0,						0,		0,			NULL,		0,									NULL,				0,0,0,			NULL,			NULL,
 	};
 
+PARAMITEM lpmSQLNextColumn[] = {
+	// szName				uParmType						fCType         	dwDex					fNull	cBytes	lpData 	cDfts								lpDfts
+	//	-----------------	--------------------------	-----------------	-----------------	-----	--------	--------	--------------------------	----------------
+	TEXT("&StatementHandle:"), PT_HSTMT | PT_LOG_IN, 0, 0, 0, 0, NULL, 0, NULL, 0, 0, 0, NULL, NULL,
+	TEXT("&ColumnParamNumberPtr:"), PT_PTR_SWORD |
+	PT_LOG_OUT, SQL_C_SHORT, 0, 0, 0, NULL, 0, NULL, 0, 0, 0, NULL, NULL,
+};
+
 PARAMITEM lpmSQLSetPos[] = {
 // szName				uParmType						fCType         	dwDex					fNull	cBytes	lpData 	cDfts								lpDfts
 //	-----------------	--------------------------	-----------------	-----------------	-----	--------	--------	--------------------------	----------------
@@ -538,6 +548,14 @@ PARAMITEM lpmSQLGetData[] = {
 	TEXT("Str&Len_or_IndPtr:"),PT_PTR_SDWORD |
 										PT_LOG_OUT,						SQL_C_SLONG,		0,						0,		0,			NULL,		0,									NULL,				0,0,0,			NULL,			NULL,
 	};
+
+PARAMITEM lpmSQLGetNestedHandle[] = {
+	// szName				uParmType						fCType         	dwDex					fNull	cBytes	lpData 	cDfts								lpDfts
+	//	-----------------	--------------------------	-----------------	-----------------	-----	--------	--------	--------------------------	----------------
+	TEXT("&StatementHandle:"), PT_HSTMT | PT_LOG_IN, 0, 0, 0, 0, NULL, 0, NULL, 0, 0, 0, NULL, NULL,
+	TEXT("&ColumnNumber:"),		PT_LOG_IN,						SQL_C_SSHORT,		DEX_DFT_ONE,		0,		0,			NULL,		0,									NULL,				0,0,0,			NULL,			NULL,
+	TEXT("&phstmt:"),			PT_PTR_HSTMT | PT_LOG_OUT,	0,						0,						0,		0,			NULL,		0,									NULL,				0,0,0,			NULL,			NULL,
+};
 
 PARAMITEM lpmSQLMoreResults[] = {
 // szName				uParmType						fCType         	dwDex					fNull	cBytes	lpData 	cDfts								lpDfts
@@ -1581,6 +1599,8 @@ struct {
 /*116*/Initlpm(SQLWriteFileDSN),
 /*117*/Initlpm(SQLGetConfigMode),
 /*118*/Initlpm(SQLSetConfigMode),
+/*119*/Initlpm(SQLNextColumn),
+/*120*/Initlpm(SQLGetNestedHandle),
 	};
 
 

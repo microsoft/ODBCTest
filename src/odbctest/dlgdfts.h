@@ -130,7 +130,10 @@ dCSEG(TCHAR) szINTERVALVAL[] = TEXT("<interval value>");
 	InitDftNoSArray10(SQL_VARCHAR,						SQL_C_SSHORT),	\
 	InitDftNoSArray30(SQL_WCHAR,							SQL_C_SSHORT),	\
 	InitDftNoSArray30(SQL_WLONGVARCHAR,					SQL_C_SSHORT),	\
-	InitDftNoSArray30(SQL_WVARCHAR,						SQL_C_SSHORT)
+	InitDftNoSArray30(SQL_WVARCHAR,						SQL_C_SSHORT),  \
+	InitDftNoSArray30(SQL_VARIANT_TYPE,					SQL_C_SSHORT),  \
+	InitDftNoSArray30(SQL_ARRAY,						SQL_C_SSHORT),  \
+	InitDftNoSArray30(SQL_MULTISET,						SQL_C_SSHORT)
 
 
 
@@ -169,6 +172,8 @@ DeclareString(SQL_NEED_DATA);
 DeclareString(SQL_NO_DATA_FOUND);
 DeclareString(SQL_SUCCESS);
 DeclareString(SQL_SUCCESS_WITH_INFO);
+DeclareString(SQL_METADATA_CHANGED);
+DeclareString(SQL_DATA_AVAILABLE);
 
 //Installer RETCODE's
 DeclareString(ODBC_ERROR_GENERAL_ERR);
@@ -389,6 +394,7 @@ DeclareString(SQL_ATTR_ROW_BIND_TYPE);
 DeclareString(SQL_ATTR_ROW_OPERATION_PTR);
 DeclareString(SQL_ATTR_ROW_FETCHED_PTR);
 DeclareString(SQL_ATTR_ROW_NUMBER);
+DeclareString(SQL_ATTR_TYPE_EXCEPTION_BEHAVIOR);
 
 
 //Connection Attributes
@@ -460,6 +466,10 @@ DeclareString(SQL_WVARCHAR);
 
 DeclareString(SQL_DATETIME);
 DeclareString(SQL_INTERVAL);
+
+DeclareString(SQL_VARIANT_TYPE);
+DeclareString(SQL_ARRAY);
+DeclareString(SQL_MULTISET);
 
 DeclareString(SQL_TYPE_MIN);
 DeclareString(SQL_TYPE_NULL);
@@ -746,6 +756,7 @@ DeclareString(SQL_ATTR_OUTPUT_NTS);
 DeclareString(SQL_ATTR_ODBC_VERSION);
 DeclareString(SQL_OV_ODBC2);
 DeclareString(SQL_OV_ODBC3);
+DeclareString(SQL_OV_ODBC4);
 
 
 /* Options for SQLDriverConnect */
@@ -1676,6 +1687,10 @@ DeclareString(SQL_UB_OFF);
 DeclareString(SQL_UB_ON);
 DeclareString(SQL_UB_VARIABLE);
 
+DeclareString(SQL_TE_ERROR);
+DeclareString(SQL_TE_CONTINUE);
+DeclareString(SQL_TE_REPORT);
+
 
 /* options for SQLSetConnectOption/SQLGetConnectOption */
 DeclareString(SQL_ACCESS_MODE);
@@ -2159,6 +2174,7 @@ DeclareString(SQLColumns);
 DeclareString(SQLDriverConnect);
 DeclareString(SQLGetConnectOption);
 DeclareString(SQLGetData);
+DeclareString(SQLGetNestedHandle);
 DeclareString(SQLGetFunctions);
 DeclareString(SQLGetInfo);
 DeclareString(SQLGetStmtOption);
@@ -2170,6 +2186,7 @@ DeclareString(SQLSetStmtOption);
 DeclareString(SQLSpecialColumns);
 DeclareString(SQLStatistics);
 DeclareString(SQLTables);
+DeclareString(SQLNextColumn);
 
 
 /* Level 2 Functions                             */
@@ -2304,6 +2321,7 @@ DeclareString(SQL_API_SQLCOLUMNS);
 DeclareString(SQL_API_SQLDRIVERCONNECT);
 DeclareString(SQL_API_SQLGETCONNECTOPTION);
 DeclareString(SQL_API_SQLGETDATA);
+DeclareString(SQL_API_SQLGETNESTEDHANDLE);
 DeclareString(SQL_API_SQLGETFUNCTIONS);
 DeclareString(SQL_API_SQLGETINFO);
 DeclareString(SQL_API_SQLGETSTMTOPTION);
@@ -2315,6 +2333,7 @@ DeclareString(SQL_API_SQLSETSTMTOPTION);
 DeclareString(SQL_API_SQLSPECIALCOLUMNS);
 DeclareString(SQL_API_SQLSTATISTICS);
 DeclareString(SQL_API_SQLTABLES);
+DeclareString(SQL_API_SQLNEXTCOLUMN);
 /* Level 2 Prototypes */
 DeclareString(SQL_API_SQLBROWSECONNECT);
 DeclareString(SQL_API_SQLCOLUMNPRIVILEGES);
@@ -2379,6 +2398,8 @@ dCSEG(DFTARRAY) lpdSqlCodes[] = {
 	InitDftNoSArray10(SQL_INVALID_HANDLE,		SQL_C_SLONG),
 	InitDftNoSArray10(SQL_STILL_EXECUTING,		SQL_C_SLONG),
 	InitDftNoSArray10(SQL_NEED_DATA,				SQL_C_SLONG),
+	InitDftNoSArray10(SQL_METADATA_CHANGED,		SQL_C_SLONG),
+	InitDftNoSArray10(SQL_DATA_AVAILABLE, 		SQL_C_SLONG),
 	};
 
 // TRUE/FALSE array
@@ -4176,6 +4197,12 @@ dCSEG(DFTARRAY) lpdAsyncEnable[] = {
 	InitDftNoSArrayVal10(SQL_ASYNC_ENABLE_ON,		SQL_C_ULONG,	PRM_32BIT),
 	};
 
+//  SQL_ATTR_TYPE_EXCEPTION_BEHAVIOR 
+dCSEG(DFTARRAY) lpdTypeExceptionBehavior[] = {
+	InitDftNoSArrayVal10(SQL_TE_ERROR,  SQL_C_ULONG,	PRM_32BIT),
+	InitDftNoSArrayVal10(SQL_TE_REPORT, SQL_C_ULONG,	PRM_32BIT),
+	InitDftNoSArrayVal10(SQL_TE_CONTINUE,SQL_C_ULONG,	PRM_32BIT),
+	};
 
 
 //  SQL_CONCURRENCY
@@ -4214,6 +4241,7 @@ dCSEG(DFTARRAY) lpdSimCursor[] = {
 
 
 dCSEG(DFTARRAY) lpdOdbcVer[] = {
+	InitDftNoSArray30(SQL_OV_ODBC4,		SQL_C_USHORT),
 	InitDftNoSArray30(SQL_OV_ODBC3,		SQL_C_USHORT),
 	InitDftNoSArray30(SQL_OV_ODBC2,		SQL_C_USHORT),
 	};
@@ -4321,6 +4349,7 @@ dCSEG(DFTARRAY) lpdfSetStmtAtr[] = {
 	InitDftSubArrayVal30(SQL_ATTR_ROWS_FETCHED_PTR,				SQL_C_SSHORT,	PRM_PTR_32BIT,lpdNullValidPointer),
 	InitDftNoSArrayVal30(SQL_ATTR_ROW_ARRAY_SIZE,				SQL_C_SSHORT,	PRM_32BIT),
 	InitDftSubArrayVal20(SQL_ATTR_SIMULATE_CURSOR,				SQL_C_SSHORT,	PRM_32BIT,	lpdSimCursor),
+	InitDftSubArrayVal30(SQL_ATTR_TYPE_EXCEPTION_BEHAVIOR,		SQL_C_SSHORT,	PRM_32BIT,	lpdTypeExceptionBehavior),
 	InitDftSubArrayVal20(SQL_ATTR_USE_BOOKMARKS,					SQL_C_SSHORT,	PRM_32BIT,	lpdUseBookMarks),
 	InitDftNoSArrayVal20(SQL_ROWSET_SIZE,							SQL_C_SSHORT,	PRM_32BIT),
 };
@@ -4363,6 +4392,7 @@ dCSEG(DFTARRAY) lpdfGetStmtAtr[] = {
 	InitDftSubArrayVal30(SQL_ATTR_ROWS_FETCHED_PTR,				SQL_C_SSHORT,	PRM_PTR_32BIT,		lpdNullValidPointer),
 	InitDftNoSArrayVal20(SQL_ATTR_ROW_ARRAY_SIZE,					SQL_C_SSHORT,	PRM_32BIT),
 	InitDftSubArrayVal20(SQL_ATTR_SIMULATE_CURSOR,				SQL_C_SSHORT,	PRM_32BIT,	lpdSimCursor),
+	InitDftSubArrayVal30(SQL_ATTR_TYPE_EXCEPTION_BEHAVIOR,			SQL_C_SSHORT,	PRM_32BIT,	lpdTypeExceptionBehavior),
 	InitDftSubArrayVal20(SQL_ATTR_USE_BOOKMARKS,					SQL_C_SSHORT,	PRM_32BIT,	lpdUseBookMarks),
 	InitDftNoSArrayVal20(SQL_ATTR_ROW_NUMBER,						SQL_C_SSHORT,	PRM_32BIT),
 	InitDftNoSArrayVal20(SQL_ROWSET_SIZE,							SQL_C_SSHORT,	PRM_32BIT),
@@ -5011,12 +5041,14 @@ dCSEG(DFTARRAY) lpdGetFunct[] = {
 	InitDftNoSArray10(SQL_API_SQLSETDESCREC,			SQL_C_USHORT),
 	InitDftNoSArray10(SQL_API_SQLGETDIAGFIELD,		SQL_C_USHORT),
 	InitDftNoSArray10(SQL_API_SQLGETDIAGREC,			SQL_C_USHORT),
+	InitDftNoSArray10(SQL_API_SQLNEXTCOLUMN,			SQL_C_USHORT),
 
 // Extension Level 1 Functions
 	InitDftNoSArray10(SQL_API_SQLCOLUMNS,				SQL_C_USHORT),
 	InitDftNoSArray10(SQL_API_SQLDRIVERCONNECT,		SQL_C_USHORT),
 	InitDftNoSArray10(SQL_API_SQLGETCONNECTOPTION,	SQL_C_USHORT),
 	InitDftNoSArray10(SQL_API_SQLGETDATA,				SQL_C_USHORT),
+	InitDftNoSArray10(SQL_API_SQLGETNESTEDHANDLE,	SQL_C_USHORT),
 	InitDftNoSArray10(SQL_API_SQLGETFUNCTIONS,		SQL_C_USHORT),
 	InitDftNoSArray10(SQL_API_SQLGETINFO,				SQL_C_USHORT),
 	InitDftNoSArray10(SQL_API_SQLGETSTMTOPTION,		SQL_C_USHORT),

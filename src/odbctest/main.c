@@ -1790,7 +1790,9 @@ VOID INTFUN ResetMenuStatus(HMENU hMenu, int iMenu, int iCalledFrom)
 			ChkMenuStatus(hMenu, SQL_API_SQLEXTENDEDFETCH, lpa, FALSE);
 			ChkMenuStatus(hMenu, SQL_API_SQLSETPOS, lpa, FALSE);
 			ChkMenuStatus(hMenu, SQL_API_SQLGETDATA, lpa, FALSE);
+			ChkMenuStatus(hMenu, SQL_API_SQLGETNESTEDHANDLE, lpa, FALSE);
 			ChkMenuStatus(hMenu, SQL_API_SQLMORERESULTS, lpa, FALSE);
+			ChkMenuStatus(hMenu, SQL_API_SQLNEXTCOLUMN, lpa, FALSE);
 			ChkMenuStatus(hMenu, SQL_API_SQLSETSCROLLOPTIONS, lpa, FALSE);
 #ifdef SQL_API_SQLLOCATOR
 			ChkMenuStatus(hMenu, SQL_API_SQLLOCATOR, lpa, FALSE);
