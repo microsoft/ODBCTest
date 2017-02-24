@@ -15,17 +15,6 @@
 VszFile;
 HINSTANCE 		hThisInst;
 
-//#ifndef _RETAIL		// Changed to #ifdef _DEBUG
-#ifdef _DEBUG
-#ifdef WIN32
-//LPGETSTATETYPE	lpGetStateType;		// Thunking DLL entry point (32s only)
-//HINSTANCE		hLoadedThunk;			// Instance handle of thunking DLL
-//dCSEG(TCHAR) szErr[]					=	"Auto Test Error";
-//dCSEG(TCHAR) szErrLoadThunk[]		=	"The Inhouse testing functions cannot run under Win32s without ERRC16UT.DLL and ERRC32UT.DLL";
-//dCSEG(TCHAR) szErrLoadThunkFunc[]	=	"Error getting address of GetStateType from ERRC32UT.DLL";
-#endif
-#endif
-
 
 //-------------------------------------------------------------------------
 //	For WIN32 programs, there is only one entry point which takes care of
@@ -33,7 +22,7 @@ HINSTANCE 		hThisInst;
 //		functions which are used heavily in the auto tests.
 //-------------------------------------------------------------------------
 #ifdef WIN32
-#include <winnt.h>
+#include <windows.h>
 
 int EXTFUN DllMain(HANDLE hInst, DWORD fdwReason, LPVOID lpReserved)
 {
