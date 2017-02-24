@@ -2328,7 +2328,7 @@ PTR INTFUN ConvertToTypeFromHex(LPTSTR str, SWORD fCType, SDWORD cbLen,UDWORD *p
 					// The following code was added so that gator correctly stores
 					// an address (i.e. a HDESC).
 					if (uParmType & PT_HDESC)
-						_stscanf(lpTemp,TEXT("%x"),lpData);
+						_stscanf(lpTemp,TEXT("%x"),(unsigned int *)lpData);
 					else
 						ConvertFromHex(lpChr, lpData, lpTemp);
 
@@ -2357,7 +2357,7 @@ PTR INTFUN ConvertToTypeFromHex(LPTSTR str, SWORD fCType, SDWORD cbLen,UDWORD *p
 				if(lpData = AllocateMemory(sizeof(UTINYINT)))
 				{
 					// Convert the data from hex to char and place in lpData
-					_stscanf(Buff, TEXT("%x"), &uTiny);
+					_stscanf(Buff, TEXT("%x"), (unsigned int *)&uTiny);
 					*(UTINYINT *)lpData=uTiny;
   					*pcBytes = sizeof(UTINYINT);
 				}
@@ -3289,7 +3289,7 @@ _inline BYTE ConvertHexCharToBinary (LPTSTR str)
 	TCHAR	tChr[3]=TEXT("");
 
 	_tcsnccpy(tChr,str,2);
-	_stscanf(tChr,TEXT("%x"),&Chr);
+	_stscanf(tChr,TEXT("%x"),(unsigned int *)&Chr);
 
 	return Chr;									// Return a pointer to the converted character
 }
