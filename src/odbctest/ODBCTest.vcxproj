@@ -239,16 +239,16 @@
   <ItemGroup>
     <ResourceCompile Include="gator.rc" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\gatortst\gatortst.vcxproj">
-      <Project>{d64bc2e7-2d3b-4a1c-84b0-7b5c2adf87a0}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
     <ODBCDLLs Include="$(ProjectDir)..\..\..\odbc_40\bin\$(Platform)\*.*" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\gatortst\gatortst.vcxproj">
+      <Project>{d64bc2e7-2d3b-4a1c-84b0-7b5c2adf87a0}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Target Name="AfterBuild">
     <Copy SourceFiles="@(ODBCDLLs)" DestinationFolder="$(OutDir)" ContinueOnError="false">

@@ -33,3 +33,13 @@ EXPORTS
 	ResetForRunList
 	GetSetLastRunInfo
 	SetGatorIniPath
+    GtrCreateFile
+    GtrMessageBox
+    GtrLoadString
+    GtrWritePrivateProfileString
+    GtrGetPrivateProfileString
+    GtrFormatMessage
+    EnumerateListBox
+    Busy
+    szEOS
+    GtrGetPrivateProfileInt

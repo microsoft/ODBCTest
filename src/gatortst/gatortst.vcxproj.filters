@@ -41,14 +41,11 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ansi\gtrtst32.def">
-      <Filter>Source Files</Filter>
+    <None Include="sources.inc">
+      <Filter>Header Files</Filter>
     </None>
     <None Include="unicode\gtrts32w.def">
       <Filter>Source Files</Filter>
-    </None>
-    <None Include="sources.inc">
-      <Filter>Header Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
