@@ -47,6 +47,9 @@
     <None Include="unicode\gtrts32w.def">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="ansi\gtrtst32.def">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="commtest.h">

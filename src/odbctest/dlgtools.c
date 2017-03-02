@@ -809,7 +809,7 @@ int wcslen_unaligned(const WCHAR UNALIGNED *str)
     const WCHAR UNALIGNED *pch;
 
     if ((PtrToUlong(str) & 1) == 0) {
-        return wcslen((LPCWSTR)str);
+        return (int)wcslen((LPCWSTR)str);
     }
 
     pch = str;
@@ -848,7 +848,7 @@ BOOL INTFUN FormatCharData(LPTSTR szOut, DWORD cbOut,
 	LPTSTR			lpData=NULL;
 
 	cchData=(fCType == SQL_C_CHAR) ?
-		strlen((char*)szData) : wcslen_unaligned((WCHAR *)szData);
+		(DWORD)strlen((char*)szData) : wcslen_unaligned((WCHAR *)szData);
 
 
 	if ( szData)
@@ -1015,7 +1015,7 @@ VOID INTFUN FormatIntervalData(SWORD fCType,SQL_INTERVAL_STRUCT *pIS,
 			}
 			else
 			{
-				wsprintf(szOut,TEXT("INTERVAL %s '%d %02d:%02d:%02d' DAY TO SECOND"),
+				wsprintf(szOut,TEXT("INTERVAL %s '%d %02d:%02d:%02d.%04d' DAY TO SECOND"),
 																		szSign,
 																		pIS->intval.day_second.day,
 																		pIS->intval.day_second.hour,
@@ -1447,7 +1447,7 @@ BOOL INTFUN FormatValueBasedOnType(LPTSTR szOut, DWORD cbOut,
 				}
 			strcpy(outstr,"0x");
 			str = outstr;
-			iOut += strlen(outstr);
+			iOut += (UINT)strlen(outstr);
 
 			// Convert binary string into a character string for display
 			//Bug #326, Bug #324, Added check for valid pointers

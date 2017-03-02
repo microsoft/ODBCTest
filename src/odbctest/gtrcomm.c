@@ -1242,7 +1242,7 @@ VOID INTFUN AddNodeToToolBar(UINT cNum,HANDLE handle,HWND hwnd, LPTSTR szHandle)
     int cchLen;
 	cchLen = wsprintf(szAddress, TEXT("%s %u:  0x%08p"), szHandle,cNum, handle);
     if (cchLen > 8 && szAddress[cchLen - 1] == 'p') {
-        wsprintf(szAddress, TEXT("%s %u:  0x%08X"), szHandle,cNum, handle);
+        wsprintf(szAddress, TEXT("%s %u:  0x%08X"), szHandle,cNum, (unsigned int)handle);
     }
     }
 #endif
@@ -1305,7 +1305,7 @@ DWORD	INTFUN FindIndexInDropDown(HWND hwnd,HANDLE handle,UINT cNum,LPTSTR szHand
     int cchLen;
 	cchLen = wsprintf(szAddress, TEXT("%s %u:  0x%08p"), szHandle,cNum, handle);
     if (cchLen > 8 && szAddress[cchLen - 1] == 'p') {
-        wsprintf(szAddress, TEXT("%s %u:  0x%08X"), szHandle,cNum, handle);
+        wsprintf(szAddress, TEXT("%s %u:  0x%08X"), szHandle,cNum, (unsigned int)handle);
     }
     }
 #endif
@@ -1522,7 +1522,7 @@ LPTSTR INTFUN HandleToText(LPTSTR szAddress,SQLHANDLE handle)
     int cchLen;
 	cchLen = wsprintf(szAddress, TEXT("0x%08p"),handle);
     if (cchLen > 2 && szAddress[cchLen - 1] == 'p') {
-        wsprintf(szAddress, TEXT("0x%08X"),handle);
+        wsprintf(szAddress, TEXT("0x%08X"), (unsigned int)handle);
     }
     }
 #endif
@@ -1759,7 +1759,7 @@ LPTSTR INTFUN ConvertToUnicode(LPSTR szStrA,LPTSTR szStrW, WORD cbStrW)
 
 #ifdef UNICODE
 	MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED,
-							szStrA, strlen(szStrA), szStrW, cbStrW/sizeof(WCHAR));
+							szStrA, (unsigned int)strlen(szStrA), szStrW, cbStrW/sizeof(WCHAR));
 #else
 	lstrcpyn(szStrW,(LPTSTR)szStrA,cbStrW-sizeof(TCHAR));
 #endif

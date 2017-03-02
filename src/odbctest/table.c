@@ -102,7 +102,7 @@ LPTSTR  INTFUN MakeData(int nRow, FIELDINFO  *FieldInfo,LPTSTR  sz)
 		_tcscpy(buf,szCol);
 		for( i=0; i< 12; i++)
 			_tcscat(buf,szCol);
-		_stprintf(sz,TEXT("%.8s-%.4s-%.4s-%.4s-%.12s"),buf,buf,buf,buf,buf,buf);
+		_stprintf(sz,TEXT("%.8s-%.4s-%.4s-%.4s-%.12s"),buf,buf,buf,buf,buf);
 		return sz;
 	}
 

@@ -9,15 +9,6 @@
 #include <ver.h>
 #endif
 
-// Constants ---------------------------------------------------------------
-// Note: 3.510 really means 3.51. When we upgrade to 3.52, it should be marked 
-// as 3.520. 
-#define VER_FILEVERSION 3,510,77,25
-#define VER_FILEVERSION_STR "3.510.77.25\0"
-#define VER_BUILD_NUMBER "7725\0"
-#define VER_PRODUCTVERSION 3,510,77,25
-#define VER_PRODUCTVERSION_STR "3.510.77.25\0"
-
 #define VER_FILEFLAGSMASK (VS_FF_DEBUG | VS_FF_PRERELEASE)
 #ifdef DEBUG
 #define VER_FILEFLAGS (VS_FF_DEBUG)

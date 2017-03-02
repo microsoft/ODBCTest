@@ -308,7 +308,7 @@ int INTFUN WriteRecordFile(HWND hwndIn,FILE *fhRecordFile,LPTSTR szBuffer,UWORD 
 	TCHAR 	szOutBuff[MAXOUTBUFF];
 	int		numwritten=0;
 
-	numwritten=fwrite(szBuffer, lstrlen(szBuffer),1,fhRecordFile);
+	numwritten=(unsigned int)fwrite(szBuffer, lstrlen(szBuffer),1,fhRecordFile);
 
 	if(numwritten < cbBuff)
 		szMessageBox(hwndIn,

@@ -924,14 +924,14 @@ BOOL EXTFUN DoszWrite(lpSERVERINFO lps, LPTSTR str, BOOL fForce, BOOL fNew)
 		//_llseek((HFILE)hf, 0L, 2);
 		//_lwrite((HFILE)hf,(LPCSTR)strA,strlen(strA));
 		SetFilePointer(hf,0L,0L,FILE_END);
-		WriteFile(hf,strA,strlen(strA),&dwWritten,NULL);
+		WriteFile(hf,strA,(DWORD)strlen(strA),&dwWritten,NULL);
 
 		if(fNew)
 		{
 //			_llseek((HFILE)hf, 0L, 2);
 //			_lwrite((HFILE)hf,(LPCSTR)"\r\n",strlen("\r\n"));
 			SetFilePointer(hf,0L,0L,FILE_END);
-			WriteFile(hf,"\r\n",strlen("\r\n"),&dwWritten,NULL);
+			WriteFile(hf,"\r\n",(DWORD)strlen("\r\n"),&dwWritten,NULL);
 
 		}
 
@@ -941,7 +941,7 @@ BOOL EXTFUN DoszWrite(lpSERVERINFO lps, LPTSTR str, BOOL fForce, BOOL fNew)
 	// For output to the screen, if there is no new-line, then try to
 	//		bufferthe string until later to avoid excessive painting.
 	if(lps->fScreen || fForce) {
-		DWORD		newlen=_tcslen(str);			// Note: lstrlen gets confused on huge strings
+		DWORD		newlen=(DWORD)_tcslen(str);			// Note: lstrlen gets confused on huge strings
 
 		// If we are finished with this line or the line is getting too large
 		//   for our buffer, then flush it to the screen
@@ -2103,7 +2103,7 @@ DWORD GtrGetPrivateProfileString(LPCTSTR lpAppName,LPCTSTR lpKeyName, LPCTSTR lp
 		lpTemp = szReturnedStringA;
 		while ( *lpTemp )
 		{
-			size += strlen(lpTemp) + 1;
+			size += (UINT)strlen(lpTemp) + 1;
 			lpTemp += strlen(lpTemp) + 1;
 		}
 		MultiByteToWideChar(CP_ACP,0,szReturnedStringA,size,lpReturnedString,nSize);
