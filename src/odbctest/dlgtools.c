@@ -669,20 +669,8 @@ BOOL INTFUN FormatSpecialParameters(lpDFTARRAY lpDfts, UINT cDfts, PTR *lpData, 
 	   		if(uBuff){
 	   			// Find the correct item in the default array
 	   			for(dTmp=0;dTmp<cDfts;dTmp++){
-
-						//Bug #464 Since SQL_OJ_CAPABILITIES = 65003 util 3.0
-						//this kludge is needed.
-						if (dTmp==115)
-							{
-							if (lpDfts[dTmp].fOpt == SQL_OJ_CAPABILITIES)
-								break;
-							}
-	   				else
-							{
 	   					if(dOption == (SWORD)lpDfts[dTmp].fOpt)
 	   						break;
-							}
-
 	   				}
 
 	   			// Search for that default bitmask
