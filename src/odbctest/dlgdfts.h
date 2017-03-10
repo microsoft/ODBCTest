@@ -354,6 +354,7 @@ DeclareString(SQL_ATTR_BIND_TYPE);
 DeclareString(SQL_ATTR_CONCURRENCY);
 DeclareString(SQL_ATTR_CONNECTION_TIMEOUT);
 DeclareString(SQL_ATTR_DISCONNECT_BEHAVIOR);
+DeclareString(SQL_ATTR_DYNAMIC_COLUMNS);
 DeclareString(SQL_ATTR_ENLIST_IN_DTC);
 DeclareString(SQL_ATTR_ENLIST_IN_XA);
 DeclareString(SQL_ATTR_CURSOR_TYPE);
@@ -395,7 +396,6 @@ DeclareString(SQL_ATTR_ROW_OPERATION_PTR);
 DeclareString(SQL_ATTR_ROW_FETCHED_PTR);
 DeclareString(SQL_ATTR_ROW_NUMBER);
 DeclareString(SQL_ATTR_TYPE_EXCEPTION_BEHAVIOR);
-
 
 //Connection Attributes
 DeclareString(SQL_ATTR_ACCESS_MODE);
@@ -4197,6 +4197,11 @@ dCSEG(DFTARRAY) lpdAsyncEnable[] = {
 	InitDftNoSArrayVal10(SQL_ASYNC_ENABLE_ON,		SQL_C_ULONG,	PRM_32BIT),
 	};
 
+dCSEG(DFTARRAY) lpdDynamicColumnsEnable[] = {
+    InitDftNoSArrayVal10(SQL_FALSE,	SQL_C_SSHORT,	PRM_32BIT),
+    InitDftNoSArrayVal10(SQL_TRUE,  SQL_C_SSHORT,	PRM_32BIT),
+};
+
 //  SQL_ATTR_TYPE_EXCEPTION_BEHAVIOR 
 dCSEG(DFTARRAY) lpdTypeExceptionBehavior[] = {
 	InitDftNoSArrayVal10(SQL_TE_ERROR,  SQL_C_ULONG,	PRM_32BIT),
@@ -4321,6 +4326,7 @@ dCSEG(DFTARRAY) lpdfSetStmtAtr[] = {
 	InitDftSubArrayVal20(SQL_ATTR_CURSOR_TYPE,					SQL_C_SSHORT,	PRM_32BIT,	lpdCursorType),
 	InitDftSubArrayVal30(SQL_ATTR_CURSOR_SCROLLABLE,			SQL_C_SSHORT,	PRM_32BIT,	lpdCursorScrollable),
 	InitDftSubArrayVal30(SQL_ATTR_CURSOR_SENSITIVITY,			SQL_C_SSHORT,	PRM_32BIT,	lpdCursorSensitivity),
+    InitDftSubArrayVal30(SQL_ATTR_DYNAMIC_COLUMNS,              SQL_C_SSHORT,   PRM_32BIT,  lpdDynamicColumnsEnable),
 	InitDftSubArrayVal30(SQL_ATTR_ENABLE_AUTO_IPD,				SQL_C_SSHORT,	PRM_32BIT,	lpdSQLTrueFalse30),
 	InitDftSubArrayVal30(SQL_ATTR_FETCH_BOOKMARK_PTR,			SQL_C_SSHORT,	PRM_PTR_BIN,lpdNullValidPointer),
 	InitDftSubArrayVal30(SQL_ATTR_IMP_PARAM_DESC,				SQL_C_SSHORT,	PRM_HDESC,	lpdNullHandle),
@@ -4363,6 +4369,7 @@ dCSEG(DFTARRAY) lpdfGetStmtAtr[] = {
 	InitDftSubArrayVal20(SQL_ATTR_CURSOR_TYPE,					SQL_C_SSHORT,	PRM_32BIT,	lpdCursorType),
 	InitDftSubArrayVal30(SQL_ATTR_CURSOR_SCROLLABLE,			SQL_C_SSHORT,	PRM_32BIT,	lpdCursorScrollable),
 	InitDftSubArrayVal30(SQL_ATTR_CURSOR_SENSITIVITY,			SQL_C_SSHORT,	PRM_32BIT,	lpdCursorSensitivity),
+    InitDftSubArrayVal20(SQL_ATTR_DYNAMIC_COLUMNS,              SQL_C_SSHORT,   PRM_32BIT,  lpdDynamicColumnsEnable),
 	InitDftSubArrayVal30(SQL_ATTR_ENABLE_AUTO_IPD,				SQL_C_SSHORT,	PRM_32BIT,	lpdSQLTrueFalse30),
 	InitDftSubArrayVal30(SQL_ATTR_FETCH_BOOKMARK_PTR,			SQL_C_SSHORT,	PRM_PTR_BIN,lpdNullValidPointer),
 	InitDftNoSArrayVal30(SQL_ATTR_IMP_PARAM_DESC,				SQL_C_SSHORT,	PRM_HDESC),
