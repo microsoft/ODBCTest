@@ -853,6 +853,7 @@ BOOL INTFUN UpdateBoundColumn(lpCONNECTIONINFO lpCI,UWORD icol,SWORD fCType,
 //| Returns:
 //|	The return code from the function
 //*---------------------------------------------------------------------------------
+static SQLUINTEGER dataAtFetch = SQL_DATA_AT_FETCH;
 RETCODE INTFUN lpSQLBindCol(STD_FH_PARMS)
 {
 	RETCODE					rc;
@@ -866,12 +867,12 @@ RETCODE INTFUN lpSQLBindCol(STD_FH_PARMS)
 	UWORD						icol=*(UWORD *)lpParms[1]->lpData;
 	SWORD						fCType=*(SWORD *)lpParms[2]->lpData;
 	BOOL						frgbValueNull=lpParms[3]->fNull;
-	SDWORD					cbValueMax = *(SDWORD *)lpParms[4]->lpData;
+	SDWORD					    cbValueMax = *(SDWORD *)lpParms[4]->lpData;
 	BOOL						fpcbValueNull=lpParms[5]->fNull;
-	SDWORD					cbValueMaxUsed=cbValueMax,
+	SDWORD					    cbValueMaxUsed=cbValueMax,
 								cbTotValueMax=0;
-	PTR						rgbValue=NULL;
-	UNALIGNED INT_PTR		*pcbValue=NULL;
+	PTR						    rgbValue=NULL;
+	UNALIGNED INT_PTR		    *pcbValue=NULL;
 	SQLHDESC					hdesc=NULL;
 	HSTMT						hstmt=NULL;
 
@@ -880,6 +881,20 @@ RETCODE INTFUN lpSQLBindCol(STD_FH_PARMS)
 
 	if (lpParms[0]->lpData)
 		hstmt=*(HSTMT *)lpParms[0]->lpData;
+
+    if (lpParms[6]->fNull)
+    { // Setting Data-at-Fetch
+      // Invoke function
+        rc = SQLBindCol(hstmt,
+                        icol,
+                        fCType,
+                        NULL,
+                        NULL,
+                        &dataAtFetch);
+        LOGRETURNCODE(NULL, ci, rc);
+        AUTOLOGERRORSI(ci, rc, hstmt);
+        return rc;
+    }
 
 	// The memory allocated for the pcbValue is not adjustable.  We'll free
 	//	it here and take care of it through the rest of this function handler

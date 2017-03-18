@@ -1024,7 +1024,7 @@ BEGIN
   PUSHBUTTON      "&Help",9,203,5,40,14
 END
 
-IDD_SQLBINDCOL DIALOG DISCARDABLE  0, 0, 284, 111
+IDD_SQLBINDCOL DIALOG DISCARDABLE  0, 0, 284, 125
 STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 CAPTION "SQLBindCol"
 FONT 8, "MS Shell Dlg"
@@ -1042,6 +1042,8 @@ BEGIN
                   BS_AUTOCHECKBOX | WS_TABSTOP,8,91,162,10
   CONTROL         "&StatementHandle:",IDCK_BC_HSTMT,"Button",
                   BS_AUTOCHECKBOX | WS_TABSTOP,8,29,264,10
+  CONTROL         "Data_at_Fetch",IDCK_BC_DATAATFETCH,"Button",
+                  BS_AUTOCHECKBOX | WS_TABSTOP,8,105,162,10
   PUSHBUTTON      "OK",IDOK,149,5,40,14
   PUSHBUTTON      "Cancel",IDCANCEL,193,5,40,14
   PUSHBUTTON      "&Help",9,238,5,40,14
@@ -5051,4 +5053,5 @@ BEGIN
   idsParamComma           "?,"
   idsInsertWCols          "insert into %s(%s) values(%s)"
   idsDropTable            "drop table "
+  idsDataAtFetch           "Sets this column's StrLen_or_Ind ptr to a buffer containing SQL_DATA_AT_FETCH"
 END

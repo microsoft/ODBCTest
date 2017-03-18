@@ -15,6 +15,7 @@
 #define IDE_BC_CBVALUEMAX               84
 #define IDCK_BC_PCBVALUE                85
 #define IDCK_BC_HSTMT                   86
+#define IDCK_BC_DATAATFETCH             87
 #define IDD_SQLCANCEL                   100
 #define IDCK_C_HSTMT                    101
 #define IDD_SQLCOLATTRIBUTES            120

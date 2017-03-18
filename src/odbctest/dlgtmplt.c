@@ -433,6 +433,7 @@ CONTROL lptSQLBindCol[] = {
 	IDE_BC_CBVALUEMAX,0,						DLG_EDIT,	NULL,						idscbValueMax,			0,			4,	0,							0,				0,			NULL,							0,0,
 	IDCK_BC_PCBVALUE,	0,						DLG_CKBOX,	NULL,						idspcbValue,			0,			5,	0,							0,				0,			NULL,							0,0,
 	IDCK_BC_HSTMT	,	0,						DLG_CKBOX,	NULL,						idsHstmt,				0,			0,	CBO_DFT_ODBC_HANDLE,	0,				0,			NULL,							0,0,
+    IDCK_BC_DATAATFETCH,0,                      DLG_CKBOX,  NULL,                       idsDataAtFetch,                   0,          6,  0,                          0,          0,          NULL,                           0,0
 	};
 
 CONTROL lptSQLFetch[] = {
