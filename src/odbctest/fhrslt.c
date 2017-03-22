@@ -884,7 +884,9 @@ RETCODE INTFUN lpSQLBindCol(STD_FH_PARMS)
 
     if (lpParms[6]->fNull)
     { // Setting Data-at-Fetch
-      // Invoke function
+        // Log input parameters
+        LOGPARAMETERS(szFuncName, lpParms, cParms, ci, TRUE);
+        // Invoke function
         rc = SQLBindCol(hstmt,
                         icol,
                         fCType,
