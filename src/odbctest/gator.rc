@@ -183,6 +183,8 @@ BEGIN
       MENUITEM "SQL&Tables...",               API_SQLTABLES
       MENUITEM "SQL&Columns...",              API_SQLCOLUMNS
       MENUITEM "SQL&Statistics...",           API_SQLSTATISTICS
+	  MENUITEM "SQLStr&ucturedTypes...",      API_SQLSTRUCTUREDTYPES
+	  MENUITEM "SQLStructure&dTypeColumns...", API_SQLSTRUCTUREDTYPECOLUMNS
       MENUITEM "SQL&PrimaryKeys...",          API_SQLPRIMARYKEYS
       MENUITEM "SQL&ForeignKeys...",          API_SQLFOREIGNKEYS
       MENUITEM "SQLT&ablePrivileges...",      API_SQLTABLEPRIVILEGES
@@ -422,7 +424,9 @@ BEGIN
       MENUITEM "SQLProc&edureColumns...",     API_SQLPROCEDURECOLUMNS
       MENUITEM "SQLSpecia&lColumns...",       API_SQLSPECIALCOLUMNS
       MENUITEM "SQL&Statistics...",           API_SQLSTATISTICS
-      MENUITEM "SQL&Tables...",               API_SQLTABLES
+	  MENUITEM "SQLStr&ucturedTypes...",      API_SQLSTRUCTUREDTYPES
+	  MENUITEM "SQLStructure&dTypeColumns...", API_SQLSTRUCTUREDTYPECOLUMNS
+	  MENUITEM "SQL&Tables...",               API_SQLTABLES
       MENUITEM "SQLT&ablePrivileges...",      API_SQLTABLEPRIVILEGES
   END
   POPUP "&Installer"
@@ -669,6 +673,8 @@ BEGIN
       MENUITEM "SQLProc&edureColumns...",     API_SQLPROCEDURECOLUMNS
       MENUITEM "SQLSpecia&lColumns...",       API_SQLSPECIALCOLUMNS
       MENUITEM "SQL&Statistics...",           API_SQLSTATISTICS
+	  MENUITEM "SQLStr&ucturedTypes...",      API_SQLSTRUCTUREDTYPES
+	  MENUITEM "SQLStructure&dTypeColumns...", API_SQLSTRUCTUREDTYPECOLUMNS
       MENUITEM "SQL&Tables...",               API_SQLTABLES
       MENUITEM "SQLT&ablePrivileges...",      API_SQLTABLEPRIVILEGES
   END
@@ -1826,6 +1832,42 @@ IDD_SQLGETSTMTATTR DIALOG DISCARDABLE  0, 0, 289, 113
      PUSHBUTTON      "&Help",9,270,5,40,14
  END
 
+ IDD_SQLSTRUCTUREDTYPECOLUMNS DIALOG DISCARDABLE  0, 0, 315, 118
+ STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+ CAPTION "SQLStructuredTypeColumns"
+ FONT 8, "MS Shell Dlg"
+ BEGIN
+     LTEXT           "&CatalogName:",-1,8,38,58,8
+     COMBOBOX        IDCB_STC_SZCATALOGNAME,68,36,115,36,CBS_DROPDOWN |
+                     CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+     LTEXT           "Schema&Name:",-1,8,54,48,8
+     COMBOBOX        IDCB_STC_SZSCHEMANAME,68,52,115,36,CBS_DROPDOWN |
+                     CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+     LTEXT           "&TypeName:",-1,8,70,50,8
+     COMBOBOX        IDCB_STC_SZTYPENAME,68,68,115,36,CBS_DROPDOWN |
+                     CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+     LTEXT           "C&olumnName:",-1,8,98,56,8
+     COMBOBOX        IDCB_STC_SZCOLUMNNAME,68,96,115,36,CBS_DROPDOWN |
+                     CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+     LTEXT           "NameLength&1:",-1,190,38,58,8
+     COMBOBOX        IDCB_STC_CBCATALOGNAME,250,36,60,30,CBS_DROPDOWN |
+                     CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+     LTEXT           "NameLength&2:",-1,190,54,60,8
+     COMBOBOX        IDCB_STC_CBSCHEMANAME,250,52,60,30,CBS_DROPDOWN |
+                     CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+     LTEXT           "NameLength&3:",-1,190,70,52,8
+     COMBOBOX        IDCB_STC_CBTYPENAME,250,68,60,30,CBS_DROPDOWN |
+                     CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+     LTEXT           "NameLength&4:",-1,190,98,57,8
+     COMBOBOX        IDCB_STC_CBCOLUMNNAME,250,96,60,30,CBS_DROPDOWN |
+                     CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+     CONTROL         "&StatementHandle:",IDCK_STC_HSTMT,"Button",
+                     BS_AUTOCHECKBOX | WS_TABSTOP,8,8,167,10
+     PUSHBUTTON      "OK",IDOK,180,5,40,14
+     PUSHBUTTON      "Cancel",IDCANCEL,225,5,40,14
+     PUSHBUTTON      "&Help",9,270,5,40,14
+ END
+
  IDD_SQLDRIVERCONNECT DIALOG DISCARDABLE  0, 0, 282, 121
  STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
  CAPTION "SQLDriverConnect"
@@ -2170,6 +2212,36 @@ END
      COMBOBOX        IDCB_T_CBTABLETYPE,250,84,60,30,CBS_DROPDOWN |
                      CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
      CONTROL         "&StatementHandle:",IDCK_T_HSTMT,"Button",
+                     BS_AUTOCHECKBOX | WS_TABSTOP,8,8,158,10
+     PUSHBUTTON      "OK",IDOK,180,5,40,14
+     PUSHBUTTON      "Cancel",IDCANCEL,225,5,40,14
+     PUSHBUTTON      "&Help",9,270,5,40,14
+ END
+
+IDD_SQLSTRUCTUREDTYPES DIALOG DISCARDABLE  0, 0, 315, 106
+ STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+ CAPTION "SQLStructuredTypes"
+ FONT 8, "MS Shell Dlg"
+ BEGIN
+     LTEXT           "&CatalogName:",-1,8,38,55,14
+     COMBOBOX        IDCB_ST_SZCATALOGNAME,68,36,115,36,CBS_DROPDOWN |
+                     CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+     LTEXT           "Sche&maName:",-1,8,54,55,14
+     COMBOBOX        IDCB_ST_SZSCHEMANAME,68,52,115,36,CBS_DROPDOWN |
+                     CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+     LTEXT           "&TypeName:",-1,8,70,48,8
+     COMBOBOX        IDCB_ST_SZTYPENAME,68,68,115,36,CBS_DROPDOWN |
+                     CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+     LTEXT           "NameLength&1:",-1,190,38,55,14
+     COMBOBOX        IDCB_ST_CBCATALOGNAME,250,36,60,30,CBS_DROPDOWN |
+                     CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+     LTEXT           "NameLength&2:",-1,190,54,55,14
+     COMBOBOX        IDCB_ST_CBSCHEMANAME,250,52,60,30,CBS_DROPDOWN |
+                     CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+     LTEXT           "NameLength&3:",-1,190,70,48,8
+     COMBOBOX        IDCB_ST_CBTYPENAME,250,68,60,30,CBS_DROPDOWN |
+                     CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP     
+     CONTROL         "&StatementHandle:",IDCK_ST_HSTMT,"Button",
                      BS_AUTOCHECKBOX | WS_TABSTOP,8,8,158,10
      PUSHBUTTON      "OK",IDOK,180,5,40,14
      PUSHBUTTON      "Cancel",IDCANCEL,225,5,40,14
@@ -4742,9 +4814,13 @@ BEGIN
   idsszTableOwner         "String search pattern for table owners"
   idsszTableName          "String search pattern for table names"
   idsszTableType          "String search pattern for table types"
+  idsszUDTTypeName        "String search pattern for Structured Type names"
+  idsszTypeName           "UDT Type name; 'TYPE', 'OPEN TYPE', or a data source–specific type name."
   idscbTableQualifier     "Length of szTableQualifier"
   idscbTableOwner         "Length of szTableOwner"
   idscbTableName          "Length of szTableName"
+  idscbUDTTypeName        "Length of szTypeName"
+  idscbTypeName           "Length of szTypeName"
 END
 
 STRINGTABLE DISCARDABLE

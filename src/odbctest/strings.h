@@ -225,7 +225,10 @@
 #define idsfSourceType									4150
 #define idsfIndicator									4151
 #define idsDisplayRowset								4152
-
+#define idsszUDTTypeName								4153
+#define idscbUDTTypeName								4154
+#define idsszTypeName									4155
+#define idscbTypeName									4156
 
 //@INSTALLER
 
