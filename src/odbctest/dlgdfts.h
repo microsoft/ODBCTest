@@ -138,7 +138,9 @@ dCSEG(TCHAR) szINTERVALVAL[] = TEXT("<interval value>");
 	InitDftNoSArray30(SQL_WVARCHAR,						SQL_C_SSHORT),  \
 	InitDftNoSArray30(SQL_VARIANT_TYPE,					SQL_C_SSHORT),  \
 	InitDftNoSArray30(SQL_ARRAY,						SQL_C_SSHORT),  \
-	InitDftNoSArray30(SQL_MULTISET,						SQL_C_SSHORT)
+	InitDftNoSArray30(SQL_MULTISET,						SQL_C_SSHORT),  \
+    InitDftNoSArray30(SQL_ROW,						    SQL_C_SSHORT),  \
+	InitDftNoSArray30(SQL_UDT,						    SQL_C_SSHORT)
 
 
 
@@ -493,6 +495,8 @@ DeclareString(SQL_INTERVAL);
 DeclareString(SQL_VARIANT_TYPE);
 DeclareString(SQL_ARRAY);
 DeclareString(SQL_MULTISET);
+DeclareString(SQL_UDT);
+DeclareString(SQL_ROW);
 
 DeclareString(SQL_TYPE_MIN);
 DeclareString(SQL_TYPE_NULL);
@@ -2267,6 +2271,8 @@ DeclareString(SQLSetConnectOption);
 DeclareString(SQLSetStmtOption);
 DeclareString(SQLSpecialColumns);
 DeclareString(SQLStatistics);
+DeclareString(SQLStructuredTypeColumns);
+DeclareString(SQLStructuredTypes);
 DeclareString(SQLTables);
 DeclareString(SQLNextColumn);
 
@@ -2414,6 +2420,8 @@ DeclareString(SQL_API_SQLSETCONNECTOPTION);
 DeclareString(SQL_API_SQLSETSTMTOPTION);
 DeclareString(SQL_API_SQLSPECIALCOLUMNS);
 DeclareString(SQL_API_SQLSTATISTICS);
+DeclareString(SQL_API_SQLSTRUCTUREDTYPECOLUMNS);
+DeclareString(SQL_API_SQLSTRUCTUREDTYPES);
 DeclareString(SQL_API_SQLTABLES);
 DeclareString(SQL_API_SQLNEXTCOLUMN);
 /* Level 2 Prototypes */
@@ -5249,6 +5257,8 @@ dCSEG(DFTARRAY) lpdGetFunct[] = {
 	InitDftNoSArray10(SQL_API_SQLSETSTMTOPTION,		SQL_C_USHORT),
 	InitDftNoSArray10(SQL_API_SQLSPECIALCOLUMNS,		SQL_C_USHORT),
 	InitDftNoSArray10(SQL_API_SQLSTATISTICS,			SQL_C_USHORT),
+	InitDftNoSArray10(SQL_API_SQLSTRUCTUREDTYPECOLUMNS,	SQL_C_USHORT),
+	InitDftNoSArray10(SQL_API_SQLSTRUCTUREDTYPES,	    SQL_C_USHORT),
 	InitDftNoSArray10(SQL_API_SQLTABLES,				SQL_C_USHORT),
 // Extension Level 2 Functions
 	InitDftNoSArray10(SQL_API_SQLBROWSECONNECT,		SQL_C_USHORT),

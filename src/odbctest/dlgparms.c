@@ -598,6 +598,17 @@ PARAMITEM lpmSQLTables[] = {
 	TEXT("NameLength&4:"),	PT_LOG_IN,						SQL_C_SSHORT,		DEX_DFT_ZERO,		0,		0,			NULL,		NumItems(lpdfNTScbValues),		(lpDFTARRAY)lpdfNTScbValues,	0,	0,0,			NULL,			NULL,
 	};
 
+PARAMITEM lpmSQLStructuredTypes[] = {
+	// szName				uParmType						fCType         	dwDex					fNull	cBytes	lpData 	cDfts								lpDfts
+	//	-----------------	--------------------------	-----------------	-----------------	-----	--------	--------	--------------------------	----------------
+	TEXT("&StatementHandle:"),PT_HSTMT | PT_LOG_IN,		0,						0,						0,		0,			NULL,		0,									NULL,				0,0,0,			NULL,			NULL,
+	TEXT("&CatalogName:"),	PT_PTR_STR | PT_LOG_IN,		SQL_C_TCHAR,		0,						0,		0,			NULL,		0,									NULL,				0,0,0,			NULL,			NULL,
+	TEXT("NameLength&1:"),	PT_LOG_IN,						SQL_C_SSHORT,		DEX_DFT_ZERO,		0,		0,			NULL,		NumItems(lpdfNTScbValues),		(lpDFTARRAY)lpdfNTScbValues,	0,	0,0,			NULL,			NULL,
+	TEXT("Sche&maName:"),	PT_PTR_STR | PT_LOG_IN,		SQL_C_TCHAR,		0,						0,		0,			NULL,		0,									NULL,				0,0,0,			NULL,			NULL,
+	TEXT("NameLength&2:"),	PT_LOG_IN,						SQL_C_SSHORT,		DEX_DFT_ZERO,		0,		0,			NULL,		NumItems(lpdfNTScbValues),		(lpDFTARRAY)lpdfNTScbValues,	0,	0,0,			NULL,			NULL,
+	TEXT("&TypeName:"),		PT_PTR_STR | PT_LOG_IN,		SQL_C_TCHAR,		0,						0,		0,			NULL,		0,									NULL,				0,0,0,			NULL,			NULL,
+	TEXT("NameLength&3:"),  PT_LOG_IN,						SQL_C_SSHORT,		DEX_DFT_ZERO,		0,		0,			NULL,		NumItems(lpdfNTScbValues),		(lpDFTARRAY)lpdfNTScbValues,	0,	0,0,			NULL,			NULL,
+};
 
 PARAMITEM lpmSQLColumns[] = {
 // szName				uParmType						fCType         	dwDex					fNull	cBytes	lpData 	cDfts								lpDfts
@@ -612,6 +623,20 @@ PARAMITEM lpmSQLColumns[] = {
 	TEXT("C&olumnName:"),	PT_PTR_STR | PT_LOG_IN,		SQL_C_TCHAR,		0,						0,		0,			NULL,		0,									NULL,				0,0,0,			NULL,			NULL,
 	TEXT("NameLength&4:"),	PT_LOG_IN,						SQL_C_SSHORT,		DEX_DFT_ZERO,		0,		0,			NULL,		NumItems(lpdfNTScbValues),		(lpDFTARRAY)lpdfNTScbValues,	0,	0,0,			NULL,			NULL,
 	};
+
+PARAMITEM lpmSQLStructuredTypeColumns[] = {
+	// szName				uParmType						fCType         	dwDex					fNull	cBytes	lpData 	cDfts								lpDfts
+	//	-----------------	--------------------------	-----------------	-----------------	-----	--------	--------	--------------------------	----------------
+	TEXT("&StatementHandle:"),PT_HSTMT | PT_LOG_IN,		0,						0,						0,		0,			NULL,		0,									NULL,				0,0,0,			NULL,			NULL,
+	TEXT("&CatalogName:"),	PT_PTR_STR | PT_LOG_IN,		SQL_C_TCHAR,		0,						0,		0,			NULL,		0,									NULL,				0,0,0,			NULL,			NULL,
+	TEXT("NameLength&1:"),	PT_LOG_IN,						SQL_C_SSHORT,		DEX_DFT_ZERO,		0,		0,			NULL,		NumItems(lpdfNTScbValues),		(lpDFTARRAY)lpdfNTScbValues,	0,	0,0,			NULL,			NULL,
+	TEXT("Schema&Name:"),	PT_PTR_STR | PT_LOG_IN,		SQL_C_TCHAR,		0,						0,		0,			NULL,		0,									NULL,				0,0,0,			NULL,			NULL,
+	TEXT("NameLength&2:"),	PT_LOG_IN,						SQL_C_SSHORT,		DEX_DFT_ZERO,		0,		0,			NULL,		NumItems(lpdfNTScbValues),		(lpDFTARRAY)lpdfNTScbValues,	0,	0,0,			NULL,			NULL,
+	TEXT("&TypeName:"),		PT_PTR_STR | PT_LOG_IN,		SQL_C_TCHAR,		0,						0,		0,			NULL,		0,									NULL,				0,0,0,			NULL,			NULL,
+	TEXT("NameLength&3:"),  PT_LOG_IN,						SQL_C_SSHORT,		DEX_DFT_ZERO,		0,		0,			NULL,		NumItems(lpdfNTScbValues),		(lpDFTARRAY)lpdfNTScbValues,	0,	0,0,			NULL,			NULL,
+	TEXT("C&olumnName:"),	PT_PTR_STR | PT_LOG_IN,		SQL_C_TCHAR,		0,						0,		0,			NULL,		0,									NULL,				0,0,0,			NULL,			NULL,
+	TEXT("NameLength&4:"),	PT_LOG_IN,						SQL_C_SSHORT,		DEX_DFT_ZERO,		0,		0,			NULL,		NumItems(lpdfNTScbValues),		(lpDFTARRAY)lpdfNTScbValues,	0,	0,0,			NULL,			NULL,
+};
 
 PARAMITEM lpmSQLStatistics[] = {
 // szName				uParmType						fCType         	dwDex					fNull	cBytes	lpData 	cDfts								lpDfts
@@ -1601,6 +1626,8 @@ struct {
 /*118*/Initlpm(SQLSetConfigMode),
 /*119*/Initlpm(SQLNextColumn),
 /*120*/Initlpm(SQLGetNestedHandle),
+/*121*/Initlpm(SQLStructuredTypes),
+/*122*/Initlpm(SQLStructuredTypeColumns),
 	};
 
 

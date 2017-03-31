@@ -249,6 +249,88 @@ RETCODE INTFUN lpSQLStatistics25(STD_FH_PARMS)
 	return(lpSQLStatistics(szFuncName,cParms,ci,lpParms,uAttrib,lpPtr));
 }
 
+//*---------------------------------------------------------------------------------
+//| lpSQLStructuredTypes:
+//| Parms:
+//|	lpDlg						The dialog descriptor
+//|	ci							Current connection informaiton (always NULL)
+//|	lpParms					Pointer to the paramter array to use for the request
+//| Returns:
+//|	The return code from the function
+//*---------------------------------------------------------------------------------
+RETCODE INTFUN lpSQLStructuredTypes(STD_FH_PARMS)
+{
+	RETCODE		rc;
+	HSTMT			hstmt = NULL;
+
+	if (lpParms[0]->lpData)
+		hstmt = *(HSTMT *)lpParms[0]->lpData;
+
+	// Log input parameters
+	LOGPARAMETERS(szFuncName, lpParms, cParms, ci, TRUE);
+	// Invoke function
+	rc = SQLStructuredTypes(hstmt,
+		(LPTSTR)lpParms[1]->lpData,											// szTableQualifier
+		*(SWORD *)lpParms[2]->lpData,            				// cbTableQualifier
+		(LPTSTR)lpParms[3]->lpData,                   				// szTableOwner
+		*(SWORD *)lpParms[4]->lpData,            				// cbTableOwner
+		(LPTSTR)lpParms[5]->lpData,                   				// szTypeName
+		*(SWORD *)lpParms[6]->lpData);          					// cbTypeName
+		
+	if (RC_SUCCESSFUL(rc))
+		ci->lpCurStmt->wCurState = STMT_EXECUTED;
+
+	// Log return code information
+	LOGRETURNCODE(NULL, ci, rc);
+
+	//  Check for errors
+	AUTOLOGERRORSI(ci, rc, hstmt);
+
+	return rc;
+}
+
+//*---------------------------------------------------------------------------------
+//| lpSQLStructuredTypeColumns:
+//| Parms:
+//|	lpDlg						The dialog descriptor
+//|	ci							Current connection informaiton (always NULL)
+//|	lpParms					Pointer to the paramter array to use for the request
+//| Returns:
+//|	The return code from the function
+//*---------------------------------------------------------------------------------
+RETCODE INTFUN lpSQLStructuredTypeColumns(STD_FH_PARMS)
+{
+	RETCODE		rc;
+	HSTMT			hstmt = NULL;
+
+	if (lpParms[0]->lpData)
+		hstmt = *(HSTMT *)lpParms[0]->lpData;
+
+
+	// Log input parameters
+	LOGPARAMETERS(szFuncName, lpParms, cParms, ci, TRUE);
+	// Invoke function
+	rc = SQLStructuredTypeColumns(hstmt,
+		(LPTSTR)lpParms[1]->lpData,										// szCatalogName
+		*(SWORD *)lpParms[2]->lpData,            						// cbCatalogName
+		(LPTSTR)lpParms[3]->lpData,                   					// szSchemaName
+		*(SWORD *)lpParms[4]->lpData,            						// cbSchemaName
+		(LPTSTR)lpParms[5]->lpData,                   					// szTypeName
+		*(SWORD *)lpParms[6]->lpData,          							// cbTypeName
+		(LPTSTR)lpParms[7]->lpData,                   					// szColumnName
+		*(SWORD *)lpParms[8]->lpData);          						// cbColumnName
+	
+	if (RC_SUCCESSFUL(rc))
+		ci->lpCurStmt->wCurState = STMT_EXECUTED;
+
+	// Log return code information
+	LOGRETURNCODE(NULL, ci, rc);
+
+	//  Check for errors
+	AUTOLOGERRORSI(ci, rc, hstmt);
+
+	return rc;
+}
 
 //*---------------------------------------------------------------------------------
 //| lpSQLPrimaryKeys:
