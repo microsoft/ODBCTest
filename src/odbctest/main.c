@@ -1848,6 +1848,8 @@ VOID INTFUN ResetMenuStatus(HMENU hMenu, int iMenu, int iCalledFrom)
 			ChkMenuStatus(hMenu, SQL_API_SQLTABLES, lpa, FALSE);
 			ChkMenuStatus(hMenu, SQL_API_SQLCOLUMNS, lpa, FALSE);
 			ChkMenuStatus(hMenu, SQL_API_SQLSTATISTICS, lpa, FALSE);
+			ChkMenuStatus(hMenu, SQL_API_SQLSTRUCTUREDTYPES, lpa, FALSE);
+			ChkMenuStatus(hMenu, SQL_API_SQLSTRUCTUREDTYPECOLUMNS, lpa, FALSE);
 			ChkMenuStatus(hMenu, SQL_API_SQLPRIMARYKEYS, lpa, FALSE);
 			ChkMenuStatus(hMenu, SQL_API_SQLFOREIGNKEYS, lpa, FALSE);
 			ChkMenuStatus(hMenu, SQL_API_SQLTABLEPRIVILEGES, lpa, FALSE);

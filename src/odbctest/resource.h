@@ -64,7 +64,7 @@
 #define IDCK_EX_HSTMT                   241
 #define IDD_SQLFETCH                    260
 #define IDCK_F_HSTMT                    261
-#define IDCK_F_DISPLAY_ROWSET				 262
+#define IDCK_F_DISPLAY_ROWSET			262
 #define IDD_SQLFREECONNECT              280
 #define IDCK_FC_HDBC                    281
 #define IDD_SQLFREEENV                  310
@@ -72,7 +72,7 @@
 #define IDD_SQLFREESTMT                 320
 #define IDCB_FS_FOPTION                 321
 #define IDCK_FS_HSTMT                   322
-#define IDCK_FS_DISPLAY_ROWSET			 323
+#define IDCK_FS_DISPLAY_ROWSET			323
 
 #define IDD_SQLGETCURSORNAME            340
 #define IDCK_GCN_SZCURSOR               341
@@ -84,6 +84,8 @@
 #define IDE_GNH_ICOL                   	352
 #define IDCK_GNH_HSTMT                 	353
 #define IDCK_GNH_OUTPUTHANDLE           354
+#define IDD_SQLSTRUCTUREDTYPES          355
+#define IDD_SQLSTRUCTUREDTYPECOLUMNS    356
 #define IDD_SQLNUMRESULTCOLS            360
 #define IDCK_NRC_PCCOL                  361
 #define IDCK_NRC_HSTMT                  362
@@ -863,6 +865,24 @@
 #define IDE_CA_ROWSET_SIZE              3162
 #define IDT_CA_HANDLE                   3163
 #define IDCB_CA_HANDLE                  3164
+
+#define IDCB_ST_SZCATALOGNAME            	3170
+#define IDCB_ST_SZSCHEMANAME             	3171
+#define IDCB_ST_SZTYPENAME              	3172
+#define IDCB_ST_CBCATALOGNAME            	3173
+#define IDCB_ST_CBSCHEMANAME             	3174
+#define IDCB_ST_CBTYPENAME              	3175
+#define IDCK_ST_HSTMT                    	3176
+
+#define IDCB_STC_SZCATALOGNAME          	3180
+#define IDCB_STC_SZSCHEMANAME           	3181
+#define IDCB_STC_SZTYPENAME              	3182
+#define IDCB_STC_SZCOLUMNNAME           	3183
+#define IDCB_STC_CBCATALOGNAME          	3184
+#define IDCB_STC_CBSCHEMANAME           	3185
+#define IDCB_STC_CBTYPENAME              	3186
+#define IDCB_STC_CBCOLUMNNAME           	3187
+#define IDCK_STC_HSTMT                  	3188
 
 //Options Tabbed Dialog
 #define IDTD_USER_AUT_OPTIONS					3200

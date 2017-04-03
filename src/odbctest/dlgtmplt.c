@@ -558,6 +558,17 @@ CONTROL lptSQLTables[] = {
 	IDCK_T_HSTMT			,	0,						DLG_CKBOX,	NULL,						idsHstmt,				0,		0,		CBO_DFT_ODBC_HANDLE,	0,								0,			NULL,							0,0,
 	};
 
+CONTROL lptSQLStructuredTypes[] = {
+//	wID					lStyle	type		szText	uDescID				uFormatStyle	iParmNum	lDataStyle									wLengthID				fUpdated	lpUsrWndProc	wDataID					fValidate
+//	----------------	-----	-----------	------	--------------		------------	--------	----------------------------------			--------				--------	------------	-----------				--------	
+	IDCB_ST_SZCATALOGNAME,	0,	DLG_COMBO,	NULL,	idsszCatalogName,		0,			1,			CBO_STRING_VAL,								IDCB_ST_CBCATALOGNAME,	0,			NULL,			0,						0,
+	IDCB_ST_SZSCHEMANAME,	0,	DLG_COMBO,	NULL,	idsszSchemaName,		0,			3,			CBO_STRING_VAL,								IDCB_ST_CBSCHEMANAME,	0,			NULL,			0,						0,
+	IDCB_ST_SZTYPENAME	,	0,	DLG_COMBO,	NULL,	idsszTypeName,			0,			5,			CBO_STRING_VAL,								IDCB_ST_CBTYPENAME,		0,			NULL,			0,						0,
+	IDCB_ST_CBCATALOGNAME,	0,	DLG_COMBO,	NULL,	idscbCatalogName,		0,			2,			CBO_PATTERN_MATCHING | CBO_DFT_SHOW_CALLEN,	0,						0,			NULL,			IDCB_ST_SZCATALOGNAME,	0,
+	IDCB_ST_CBSCHEMANAME,	0,	DLG_COMBO,	NULL,	idscbSchemaName,		0,			4,			CBO_PATTERN_MATCHING | CBO_DFT_SHOW_CALLEN,	0,						0,			NULL,			IDCB_ST_SZSCHEMANAME,	0,
+	IDCB_ST_CBTYPENAME	,	0,	DLG_COMBO,	NULL,	idscbTypeName,			0,			6,			CBO_PATTERN_MATCHING | CBO_DFT_SHOW_CALLEN,	0,						0,			NULL,			IDCB_ST_SZTYPENAME,		0,
+	IDCK_ST_HSTMT		,	0,	DLG_CKBOX,	NULL,	idsHstmt,				0,			0,			CBO_DFT_ODBC_HANDLE,						0,						0,			NULL,			0,						0,
+};
 
 CONTROL lptSQLColumns[] = {
 //	wID	lStyle				type			szText					uDescID					uFormatStyle			iParmNum	lDataStyle				wLengthID	fUpdated	lpUsrWndProc   wDataID	fValidate
@@ -577,6 +588,19 @@ CONTROL lptSQLColumns[] = {
 	IDCK_COL_HSTMT			,	0,						DLG_CKBOX,	NULL,						idsHstmt,				0,		0,		CBO_DFT_ODBC_HANDLE,	0,										0,			NULL,						0,0,
 	};
 
+CONTROL lptSQLStructuredTypeColumns[] = {
+//	wID					lStyle	type		szText	uDescID				uFormatStyle	iParmNum	lDataStyle									wLengthID				fUpdated	lpUsrWndProc	wDataID					fValidate
+//	----------------	-----	-----------	------	--------------		------------	--------	----------------------------------			--------				--------	------------	-----------				--------	
+	IDCB_STC_SZCATALOGNAME,	0,	DLG_COMBO,	NULL,	idsszCatalogName,		0,			1,			CBO_STRING_VAL,								IDCB_STC_CBCATALOGNAME,	0,			NULL,			0,						0,
+	IDCB_STC_SZSCHEMANAME,	0,	DLG_COMBO,	NULL,	idsszSchemaName,		0,			3,			CBO_STRING_VAL,								IDCB_STC_CBSCHEMANAME,	0,			NULL,			0,						0,
+	IDCB_STC_SZTYPENAME,	0,	DLG_COMBO,	NULL,	idsszUDTTypeName,		0,			5,			CBO_STRING_VAL,								IDCB_STC_CBTYPENAME,	0,			NULL,			0,						0,
+	IDCB_STC_SZCOLUMNNAME,	0,	DLG_COMBO,	NULL,	idsszColumnName,		0,			7,			CBO_STRING_VAL,								IDCB_STC_CBCOLUMNNAME,	0,			NULL,			0,						0,
+	IDCB_STC_CBCATALOGNAME,	0,	DLG_COMBO,	NULL,	idscbCatalogName,		0,			2,			CBO_PATTERN_MATCHING | CBO_DFT_SHOW_CALLEN,	0,						0,			NULL,			IDCB_STC_SZCATALOGNAME,	0,
+	IDCB_STC_CBSCHEMANAME,	0,	DLG_COMBO,	NULL,	idscbSchemaName,		0,			4,			CBO_PATTERN_MATCHING | CBO_DFT_SHOW_CALLEN,	0,						0,			NULL,			IDCB_STC_SZSCHEMANAME,	0,
+	IDCB_STC_CBTYPENAME,	0,	DLG_COMBO,	NULL,	idscbUDTTypeName,		0,			6,			CBO_PATTERN_MATCHING | CBO_DFT_SHOW_CALLEN,	0,						0,			NULL,			IDCB_STC_SZTYPENAME,	0,
+	IDCB_STC_CBCOLUMNNAME,	0,	DLG_COMBO,	NULL,	idscbColumnName,		0,			8,			CBO_PATTERN_MATCHING | CBO_DFT_SHOW_CALLEN,	0,						0,			NULL,			IDCB_STC_SZCOLUMNNAME,	0,
+	IDCK_STC_HSTMT		,	0,	DLG_CKBOX,	NULL,	idsHstmt,				0,			0,			CBO_DFT_ODBC_HANDLE,						0,						0,			NULL,			0,						0,
+};
 
 CONTROL lptSQLStatistics[] = {
 //	wID	lStyle				type			szText					uDescID					uFormatStyle			iParmNum	lDataStyle				wLengthID	fUpdated	lpUsrWndProc   wDataID	fValidate
@@ -1670,6 +1694,8 @@ struct {
 /*118*/Initlpt(SQLSetConfigMode),
 /*119*/Initlpt(SQLNextColumn),
 /*120*/Initlpt(SQLGetNestedHandle),
+/*121*/Initlpt(SQLStructuredTypes),
+/*122*/Initlpt(SQLStructuredTypeColumns),
 };
 
 //*---------------------------------------------------------------------------------
