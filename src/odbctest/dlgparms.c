@@ -492,6 +492,7 @@ PARAMITEM lpmSQLBindCol[] = {
 	TEXT("&BufferLength:"),		PT_LOG_IN,						SQL_C_SLONG,		0,						0,		0,			NULL,		0,									NULL,				0,0,0,			NULL,			NULL,
 	TEXT("Str&Len_or_IndPtr:"),PT_PTR_SDWORD |
 										PT_LOG_DEFFERED,				SQL_C_SLONG,		0,						0,		0,			NULL,		0,									NULL,				0,0,0,			NULL,			NULL,
+    TEXT("Data_at_Fetch"),      PT_PTR_UWORD,                   SQL_C_USHORT,       0,                      0,      0,          NULL,       0,                                  NULL,               0,0,0,          NULL,           NULL,
 	};
 
 PARAMITEM lpmSQLFetch[] = {

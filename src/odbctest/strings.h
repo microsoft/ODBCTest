@@ -549,6 +549,7 @@
 #define idsInsertWCols          						7040
 #define idsDropTable            						7041
 #define idsDeleteType									7042
+#define idsDataAtFetch                                  7043
 
 // User Option strings (6500 - 6550 reserved)
 #define USER_OPT_BASE									6500
