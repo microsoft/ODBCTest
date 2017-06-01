@@ -853,7 +853,7 @@ BOOL INTFUN UpdateBoundColumn(lpCONNECTIONINFO lpCI,UWORD icol,SWORD fCType,
 //| Returns:
 //|	The return code from the function
 //*---------------------------------------------------------------------------------
-static SQLUINTEGER dataAtFetch = SQL_DATA_AT_FETCH;
+static SQLLEN dataAtFetch = SQL_DATA_AT_FETCH;
 RETCODE INTFUN lpSQLBindCol(STD_FH_PARMS)
 {
 	RETCODE					rc;
