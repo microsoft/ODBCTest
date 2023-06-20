@@ -64,7 +64,7 @@ RETCODE INTFUN lpSQLAllocHandle(STD_FH_PARMS)
 		hInHandle=*(SQLHANDLE *)lpParms[1]->lpData;
 
 	BUILDOUTPUTPARM(lpParms[2], 							// Allocate OutputHandlePtr
-						sizeof(UDWORD),						//  based on cbValueMax
+						sizeof(SQLHANDLE),					//  based on cbValueMax
 						lpUsrOptions->fBufferChecking);
 
 	// Log input parameters
